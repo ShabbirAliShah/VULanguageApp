@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/languageViewFragment">
+
+    <fragment
+        android:id="@+id/languageViewFragment"
+        android:name="com.example.vulanguageapp.fragments.LanguageViewFragment"
+        android:label="fragment_language_view"
+        tools:layout="@layout/fragment_language_view" >
+        <action
+            android:id="@+id/action_languageViewFragment_to_languageDetailFragment"
+            app:destination="@id/languageDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageDetailFragment"
+        android:name="com.example.vulanguageapp.fragments.LanguageDetailFragment"
+        android:label="fragment_language_detail"
+        tools:layout="@layout/fragment_language_detail" >
+        <action
+            android:id="@+id/action_languageDetailFragment_to_languageViewFragment"
+            app:destination="@id/languageViewFragment" />
+        <action
+            android:id="@+id/action_languageDetailFragment_to_topicToEnrollFragment"
+            app:destination="@id/topicToEnrollFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/topicToEnrollFragment"
+        android:name="com.example.vulanguageapp.fragments.TopicToEnrollFragment"
+        android:label="fragment_topic_to_enroll"
+        tools:layout="@layout/fragment_topic_to_enroll" />
+
+</navigation>

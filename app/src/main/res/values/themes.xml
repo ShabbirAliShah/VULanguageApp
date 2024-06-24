@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.VULanguageApp" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary"> @color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.VULanguageApp" parent="Base.Theme.VULanguageApp" />
+
+    <style name="Theme.VULanguageApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.VULanguageApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.VULanguageApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
