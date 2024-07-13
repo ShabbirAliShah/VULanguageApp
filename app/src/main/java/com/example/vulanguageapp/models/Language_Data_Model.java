@@ -12,7 +12,7 @@ public class Language_Data_Model {
     }
 
     public Language_Data_Model(String key, String languageName, String countryName){
-        this.key = key;
+        //this.key = key;
         this.languageName = languageName;
         this.countryName = countryName;
     }

@@ -22,7 +22,6 @@ public class LearnersOnlineFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-
         binding = FragmentLearnersOnlineBinding.inflate(inflater, container, false);
         return binding.getRoot();
 

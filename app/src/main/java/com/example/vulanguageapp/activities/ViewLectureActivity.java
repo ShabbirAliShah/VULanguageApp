@@ -3,7 +3,6 @@ package com.example.vulanguageapp.activities;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -13,7 +12,7 @@ import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.databinding.ActivityViewLectureBinding;
 import com.google.android.material.snackbar.Snackbar;
 
-public class ViewLectureActivity extends AppCompatActivity {
+public class ViewLectureActivity extends BaseActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityViewLectureBinding binding;
@@ -41,10 +40,10 @@ public class ViewLectureActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_view_lecture);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_view_lecture);
+//        return NavigationUI.navigateUp(navController, appBarConfiguration)
+//                || super.onSupportNavigateUp();
+//    }
 }

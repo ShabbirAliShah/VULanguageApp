@@ -1,23 +1,27 @@
 package com.example.vulanguageapp.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
+import com.example.vulanguageapp.interfaces.LanguageActivityFragmentClickListener;
 import com.example.vulanguageapp.models.Language_Data_Model;
+
 import java.util.ArrayList;
 
-public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHolder>{ private ArrayList<Language_Data_Model> dataList;
-    private Context context;
-    public LanguageAdapter(ArrayList<Language_Data_Model> dataList, Context context) {
+public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHolder>{
+    private ArrayList<Language_Data_Model> dataList;
+    private LanguageActivityFragmentClickListener listener;
+
+    public LanguageAdapter(ArrayList<Language_Data_Model> dataList, LanguageActivityFragmentClickListener listener) {
         this.dataList = dataList;
-        this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,6 +40,9 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
         Language_Data_Model langModel = dataList.get(position);
         holder.languageName.setText(langModel.getLanguageName());
         holder.languageDescription.setText(langModel.getLanguageDescription());
+
+        holder.languageCardClick.setOnClickListener(v -> listener.onLanguageCardClick(v));
+
     }
 
     @Override
@@ -47,11 +54,13 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView languageName,languageDescription;
+        LinearLayout languageCardClick;
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
         languageName = itemView.findViewById(R.id.langName);
         languageDescription = itemView.findViewById(R.id.langDescription);
+        languageCardClick = itemView.findViewById(R.id.language_Card);
     }
     }
 }
