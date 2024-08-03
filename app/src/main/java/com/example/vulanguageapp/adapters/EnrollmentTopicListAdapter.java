@@ -38,7 +38,7 @@ public class EnrollmentTopicListAdapter extends RecyclerView.Adapter<EnrollmentT
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Language_Data_Model langModel = dataList.get(position);
-        holder.topicName.setText(langModel.getLanguageName());
+        holder.topicName.setText(langModel.getName());
 
     }
 

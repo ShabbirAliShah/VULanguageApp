@@ -29,13 +29,7 @@ public class TopicToEnrollFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         dataList = new ArrayList<>();
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu"));
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu "));
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu "));
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu "));
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu "));
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu "));
-        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu "));
+        dataList.add(new Language_Data_Model( "Lecture 1: This is the first lecture of Urdu","Just test",""));
 
     }
     RecyclerView recyclerView;

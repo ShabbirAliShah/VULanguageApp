@@ -1,28 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
+    android:layout_margin="5dp"
     android:elevation="5dp">
 
     <LinearLayout
-        android:id="@+id/langCard"
+        android:id="@+id/cardHm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F1A238"
+        android:background="#637D84"
         android:orientation="vertical"
+        android:clickable="true"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingRight="20dp"
         android:paddingBottom="20dp"
         android:textAlignment="center">
-
-<!--        <TextView-->
-<!--            android:id="@+id/keyTextView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Key:"-->
-<!--            android:textStyle="bold" />-->
 
         <TextView
             android:id="@+id/langTextView"
@@ -36,6 +30,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Country" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description:"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -1,27 +1,30 @@
 package com.example.vulanguageapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.interfaces.LanguageActivityFragmentClickListener;
+import com.example.vulanguageapp.fragments.LanguageViewFragment;
 import com.example.vulanguageapp.models.Language_Data_Model;
 
 import java.util.ArrayList;
 
 public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHolder>{
     private ArrayList<Language_Data_Model> dataList;
-    private LanguageActivityFragmentClickListener listener;
+    private LanguageViewFragment fragment;
+    private Context context;
 
-    public LanguageAdapter(ArrayList<Language_Data_Model> dataList, LanguageActivityFragmentClickListener listener) {
+    public LanguageAdapter(ArrayList<Language_Data_Model> dataList, Context context) {
         this.dataList = dataList;
-        this.listener = listener;
+        this.context = context;
     }
 
     @NonNull
@@ -38,10 +41,14 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Language_Data_Model langModel = dataList.get(position);
-        holder.languageName.setText(langModel.getLanguageName());
+        holder.languageName.setText(langModel.getName());
         holder.languageDescription.setText(langModel.getLanguageDescription());
-
-        holder.languageCardClick.setOnClickListener(v -> listener.onLanguageCardClick(v));
+        holder.layoutClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "this click", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -54,13 +61,14 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView languageName,languageDescription;
-        LinearLayout languageCardClick;
+        Button layoutClick;
+
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
         languageName = itemView.findViewById(R.id.langName);
         languageDescription = itemView.findViewById(R.id.langDescription);
-        languageCardClick = itemView.findViewById(R.id.language_Card);
+        layoutClick = itemView.findViewById(R.id.btn);
     }
     }
 }

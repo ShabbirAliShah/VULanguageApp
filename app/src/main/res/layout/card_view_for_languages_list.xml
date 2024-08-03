@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardViewLangugages"
     android:layout_width="match_parent"
+    app:cardElevation="0.6dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -12,7 +14,6 @@
         android:background="#FFFFFF"
         android:backgroundTint="#CBDABE"
         android:orientation="vertical"
-        android:elevation="@dimen/cardview_default_elevation"
         android:padding="12dp">
 
         <TextView
@@ -20,12 +21,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-            android:text="Urdu Advance" />
+            android:text="Urdu Advance"
+            />
 
         <TextView
             android:id="@+id/langDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Learn Urdu in advance level" />
+            android:text="Learn Urdu in advance level"
+            />
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test button"
+        android:id="@+id/btn">
+
+    </Button>
 </androidx.cardview.widget.CardView>

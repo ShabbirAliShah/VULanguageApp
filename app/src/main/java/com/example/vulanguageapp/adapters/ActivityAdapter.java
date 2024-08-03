@@ -1,9 +1,9 @@
 package com.example.vulanguageapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.interfaces.MainActivityClickListener;
-import com.example.vulanguageapp.interfaces.MainActivityFragmentClickListener;
 import com.example.vulanguageapp.models.Language_Data_Model;
 
 import java.util.ArrayList;
@@ -20,14 +18,11 @@ import java.util.ArrayList;
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
 
     private ArrayList<Language_Data_Model> dataList;
-    private MainActivityFragmentClickListener fragmentlistener;
-    private MainActivityClickListener mainActivityListener;
-
-    public ActivityAdapter(ArrayList<Language_Data_Model> dataList,
-                           MainActivityFragmentClickListener fragmentlistener) {
+    private Context context;
+    public ActivityAdapter(ArrayList<Language_Data_Model> dataList, Context context) {
 
         this.dataList = dataList;
-        this.fragmentlistener = fragmentlistener;
+        this.context = context;
     }
 
     @NonNull
@@ -42,12 +37,10 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Language_Data_Model langModel = dataList.get(position);
-        //holder.keyText.setText(langModel.getKey());
-        holder.countryText.setText(langModel.getCountryName());
-        holder.languageText.setText(langModel.getLanguageName());
-
-        holder.langCard.setOnClickListener(fragmentlistener::onLangCardClick);
-
+        holder.countryText.setText(langModel.getName());
+        holder.languageText.setText(langModel.getCountry());
+        holder.languageDescription.setText(langModel.getLanguageDescription());
+        //holder.crdVwClick.setOnClickListener(v -> listener.onLangCardClick(v));
     }
 
     @Override
@@ -55,18 +48,16 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         return  dataList.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView keyText, languageText, countryText;
-        LinearLayout langCard;
-        Button btnLanguageView;
+        TextView languageText, languageDescription, countryText;
+        LinearLayout crdVwClick;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
-            //keyText = itemView.findViewById(R.id.keyTextView);
             countryText = itemView.findViewById(R.id.countryTextView);
             languageText = itemView.findViewById(R.id.langTextView);
-            langCard = itemView.findViewById(R.id.langCard);
-           // btnLanguageView = itemView.findViewById(R.id.btnLanguageView);
+            languageDescription = itemView.findViewById(R.id.description);
+            //crdVwClick = itemView.findViewById(R.id.cardHm);
         }
     }
 }

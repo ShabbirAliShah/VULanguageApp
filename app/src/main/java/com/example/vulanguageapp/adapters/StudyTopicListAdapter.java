@@ -1,5 +1,6 @@
 package com.example.vulanguageapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.interfaces.LessonActivityFragmentClickListener;
 import com.example.vulanguageapp.models.Language_Data_Model;
 
 import java.util.ArrayList;
@@ -18,11 +18,11 @@ import java.util.ArrayList;
 public class StudyTopicListAdapter extends RecyclerView.Adapter<StudyTopicListAdapter.ViewHolder> {
 
     private final ArrayList<Language_Data_Model> studyTopicListData;
-    private final LessonActivityFragmentClickListener lessonClickListener;
+    private Context context;
 
-    public StudyTopicListAdapter(ArrayList<Language_Data_Model> studyTopicListData,LessonActivityFragmentClickListener lessonClickListener) {
+    public StudyTopicListAdapter(ArrayList<Language_Data_Model> studyTopicListData, Context context) {
         this.studyTopicListData = studyTopicListData;
-        this.lessonClickListener = lessonClickListener;
+        this.context = context;
     }
 
     @NonNull
@@ -37,8 +37,7 @@ public class StudyTopicListAdapter extends RecyclerView.Adapter<StudyTopicListAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Language_Data_Model langDataPosition = studyTopicListData.get(position);
-        holder.studyTopicName.setText(langDataPosition.getLanguageName());
-        holder.cardViewClk.setOnClickListener(lessonClickListener::onCourseContentClick);
+        holder.studyTopicName.setText(langDataPosition.getName());
     }
 
     @Override
