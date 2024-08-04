@@ -81,7 +81,12 @@ public class LanguageViewFragment extends Fragment{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        binding.myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
