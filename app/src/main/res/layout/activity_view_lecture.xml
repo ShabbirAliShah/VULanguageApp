@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,11 +10,6 @@
     tools:context=".activities.ViewLectureActivity">
 
     <include layout="@layout/content_view_lecture" />
-
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navView"
@@ -23,6 +20,4 @@
             app:headerLayout="@layout/header"
             app:menu="@menu/drawer_menu" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

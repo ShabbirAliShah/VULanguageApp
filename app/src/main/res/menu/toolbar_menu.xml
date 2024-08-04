@@ -7,7 +7,7 @@
 
     <item android:title="Languages"
         android:icon="@drawable/ic_menu_gallery"
-        android:id="@+id/languages">
+        android:id="@+id/language">
     </item>
 
     <item android:title="Lessons"

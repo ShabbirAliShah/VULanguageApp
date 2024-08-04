@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,12 +41,6 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
         Language_Data_Model langModel = dataList.get(position);
         holder.languageName.setText(langModel.getName());
         holder.languageDescription.setText(langModel.getLanguageDescription());
-        holder.layoutClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "this click", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
@@ -61,14 +53,12 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView languageName,languageDescription;
-        Button layoutClick;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
         languageName = itemView.findViewById(R.id.langName);
         languageDescription = itemView.findViewById(R.id.langDescription);
-        layoutClick = itemView.findViewById(R.id.btn);
     }
     }
 }
