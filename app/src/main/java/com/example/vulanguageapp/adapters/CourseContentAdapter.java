@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +57,7 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView lessonTitle;
-        LinearLayout card_for_course_content;
+        CardView card_for_course_content;
 
         public ViewHolder(View itemView){
             super(itemView);

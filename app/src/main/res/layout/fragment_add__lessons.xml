@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="30sp"
+            android:text="Add Lesson"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/audioLinkEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Audio Link"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/contentTypeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Content Type"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/courseIdEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Course ID"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/flashcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Flashcard"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="exercise"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/imageLinkEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Image Link"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/videoLinkEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Video Link"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/insertButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insert Lesson" />
+
+</LinearLayout>

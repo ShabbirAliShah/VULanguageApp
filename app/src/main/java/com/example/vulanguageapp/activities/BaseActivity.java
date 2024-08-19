@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.vulanguageapp.R;
+import com.example.vulanguageapp.adminControlls.activities.AdminDashboard;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -94,6 +95,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
                 else if (itemId == R.id.lecture) {
                     startActivity(new Intent(BaseActivity.this, ViewLectureActivity.class));
+                } else if (itemId == R.id.admin) {
+                    startActivity(new Intent(BaseActivity.this, AdminDashboard.class));
+
                 }
 
                 drawerLayout.closeDrawer(GravityCompat.START);

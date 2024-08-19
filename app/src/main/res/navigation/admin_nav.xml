@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_nav.xml"
+    app:startDestination="@id/create_Course">
+
+    <fragment
+        android:id="@+id/dashBoard"
+        android:name="com.example.vulanguageapp.adminControlls.fragments.DashBoard"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" >
+        <action
+            android:id="@+id/action_dashBoard_to_create_Course"
+            app:destination="@id/create_Course" />
+        <action
+            android:id="@+id/action_dashBoard_to_addLessons"
+            app:destination="@id/addLessons" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLessons"
+        android:name="com.example.vulanguageapp.adminControlls.fragments.AddLessons"
+        android:label="AddLessons" />
+    <fragment
+        android:id="@+id/create_Course"
+        android:name="com.example.vulanguageapp.adminControlls.fragments.Create_Course"
+        android:label="fragment_create__course"
+        tools:layout="@layout/fragment_create__course" />
+</navigation>

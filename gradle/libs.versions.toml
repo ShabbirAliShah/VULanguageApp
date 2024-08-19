@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.1"
 core = "12.1.0"
+firestore = "25.0.0"
 firebaseBom = "33.1.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -19,12 +20,14 @@ supportAnnotations = "28.0.0"
 legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.8.4"
 lifecycleViewmodelKtx = "2.8.4"
-annotation = "1.8.1"
+annotation = "1.8.2"
+firebaseFirestore = "25.0.0"
+viewpager2 = "1.1.0"
 
 [libraries]
 core-v1210 = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "core" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
-google-firebase-auth = { module = "com.google.firebase:firebase-auth" }
+google-firebase-auth = { module = "com.google.firebase:firebase-auth", version = "23.0.0" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -43,6 +46,8 @@ legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", ver
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

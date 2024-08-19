@@ -2,6 +2,7 @@ package com.example.vulanguageapp.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseModel implements Serializable {
 
@@ -9,9 +10,9 @@ public class CourseModel implements Serializable {
     private String level;
     private String title;
     private String key; // For storing course ID
-    private ArrayList<String> lessons; // For storing lessons
+    private List<String> lessons; // For storing lessons
 
-    public CourseModel(String language, String level, String title, String key, ArrayList<String> lessons) {
+    public CourseModel(String language, String level, String title, String key, List<String> lessons) {
         this.language = language;
         this.level = level;
         this.title = title;
@@ -39,7 +40,7 @@ public class CourseModel implements Serializable {
         return key;
     }
 
-    public ArrayList<String> getLessons() {
+    public List<String> getLessons() {
         return lessons;
     }
 

@@ -23,6 +23,7 @@ public class ChatConversationFragment extends Fragment {
     ) {
 
         binding = FragmentChatConversationBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
 
     }

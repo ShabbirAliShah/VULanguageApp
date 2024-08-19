@@ -1,7 +1,6 @@
 package com.example.vulanguageapp.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +9,10 @@ public class LessonsModel {
     private String audioLink;
     private String contentType;
     private String courseId;
-    //private ArrayList<String> exercises;
-    //private ArrayList<String> flashCards;
+    private List<String> exercises;
+    private List<String> flashCards;
     private String imageLink;
-    //private List<Map<String, Object>> quiz;
+    private List<Map<String, Object>> quiz;
     private String title;
     private String videoLink;
     private boolean selected;
@@ -22,7 +21,7 @@ public class LessonsModel {
         // Default constructor required for calls to DataSnapshot.getValue(LessonsModel.class)
     }
 
-    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, boolean selected) {
+    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, boolean selected, List<String> flashCards, List<String> exercises  ) {
 
         this.lessonId = lessonId;
         this.audioLink = audioLink;
@@ -32,6 +31,8 @@ public class LessonsModel {
         this.title = title;
         this.videoLink = videoLink;
         this.selected = selected;
+        this.flashCards = flashCards;
+        this.exercises = exercises;
     }
 
     public String getLessonId() {
@@ -98,4 +99,19 @@ public class LessonsModel {
         this.selected = selected;
     }
 
-   }
+    public List<String> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<String> exercises) {
+        this.exercises = exercises;
+    }
+
+    public List<String> getFlashCards() {
+        return flashCards;
+    }
+
+    public void setFlashCards(List<String> flashCards) {
+        this.flashCards = flashCards;
+    }
+}
