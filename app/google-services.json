@@ -13,7 +13,20 @@
           "package_name": "com.example.vulanguageapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "100822760547-lgjgflaf4qus60ipfdqqoedthfv2sip6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vulanguageapp",
+            "certificate_hash": "16d919afba2edfb7a8a5c172160e3dba8ab7624a"
+          }
+        },
+        {
+          "client_id": "100822760547-cmf24rhkstj22789b62v1nepe1as0equ.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAi1e-7qXWuoSE4GYtE_NbcPhSHNIRAiOw"
@@ -21,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100822760547-cmf24rhkstj22789b62v1nepe1as0equ.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_chat"
+    android:id="@+id/chat_nav"
     app:startDestination="@id/learnersOnlineFragment">
 
     <fragment
@@ -17,9 +17,6 @@
     <fragment
         android:id="@+id/chatConversationFragment"
         android:name="com.example.vulanguageapp.fragments.ChatConversationFragment"
-        android:label="ChatConversationFragment" >
-        <action
-            android:id="@+id/action_chatConversationFragment_to_learnersOnlineFragment"
-            app:destination="@id/learnersOnlineFragment" />
-    </fragment>
+        android:label="fragment_chat_conversation"
+        tools:layout="@layout/fragment_chat_conversation" />
 </navigation>

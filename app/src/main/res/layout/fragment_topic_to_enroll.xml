@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.TopicToEnrollFragment">
 
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="402dp"
+        android:layout_height="103dp"
+        android:orientation="vertical"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please check/uncheck to select your lessons"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/enrollmentStatusMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please check/uncheck to select your lessons"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/topic_list_to_enroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_height="450dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/design_default_color_secondary_variant"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+    <Button
+        android:id="@+id/setEnroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Enroll Now"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topic_list_to_enroll" />
+
+    <Button
+        android:text="Contitnue to course"
+        android:id="@+id/continueToCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/topic_list_to_enroll"
+        app:layout_constraintTop_toBottomOf="@+id/topic_list_to_enroll" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

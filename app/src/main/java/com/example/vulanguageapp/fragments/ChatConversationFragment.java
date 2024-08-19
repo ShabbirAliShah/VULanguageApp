@@ -32,7 +32,7 @@ public class ChatConversationFragment extends Fragment {
 
         binding.buttonSecond.setOnClickListener(v ->
                 NavHostFragment.findNavController(ChatConversationFragment.this)
-                        .navigate(R.id.action_chatConversationFragment_to_learnersOnlineFragment)
+                        .navigate(R.id.action_learnersOnlineFragment_to_chatConversationFragment)
         );
     }
 

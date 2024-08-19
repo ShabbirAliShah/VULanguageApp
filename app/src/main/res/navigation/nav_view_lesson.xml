@@ -2,25 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_lecture_activity"
-    app:startDestination="@id/topicsToStudy">
+    android:id="@+id/nav_view_lesson"
+    app:startDestination="@id/enrolledCoursesFragment">
 
     <fragment
-        android:id="@+id/topicsToStudy"
+        android:id="@+id/topicsToStudyFragment"
         android:name="com.example.vulanguageapp.fragments.TopicsToStudyFragment"
         android:label="fragment_topics_to_study"
         tools:layout="@layout/fragment_topics_to_study" >
         <action
-            android:id="@+id/action_topicsToStudy_to_lectureViewFragment"
+            android:id="@+id/action_topicsToStudyFragment_to_lectureViewFragment"
             app:destination="@id/lectureViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/lectureViewFragment"
         android:name="com.example.vulanguageapp.fragments.LectureViewFragment"
         android:label="fragment_lecture_view"
-        tools:layout="@layout/fragment_lecture_view" >
+        tools:layout="@layout/fragment_lecture_view" />
+    <fragment
+        android:id="@+id/enrolledCoursesFragment"
+        android:name="com.example.vulanguageapp.fragments.EnrolledCoursesFragment"
+        android:label="fragment_enrolled_courses"
+        tools:layout="@layout/fragment_enrolled_courses" >
         <action
-            android:id="@+id/action_lectureViewFragment_to_topicsToStudy"
-            app:destination="@id/topicsToStudy" />
+            android:id="@+id/action_enrolledCoursesFragment_to_topicsToStudyFragment"
+            app:destination="@id/topicsToStudyFragment" />
     </fragment>
 </navigation>

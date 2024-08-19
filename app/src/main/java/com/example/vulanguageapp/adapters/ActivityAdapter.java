@@ -1,29 +1,34 @@
 package com.example.vulanguageapp.adapters;
 
-import android.content.Context;
+import static android.app.PendingIntent.getActivity;
+
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.models.Language_Data_Model;
+import com.example.vulanguageapp.activities.BaseActivity;
+import com.example.vulanguageapp.models.CourseModel;
 
 import java.util.ArrayList;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
 
-    private ArrayList<Language_Data_Model> dataList;
-    private Context context;
-    public ActivityAdapter(ArrayList<Language_Data_Model> dataList, Context context) {
+    private ArrayList<CourseModel> dataList;
+    private NavController navController;
+
+    public ActivityAdapter(ArrayList<CourseModel> dataList, NavController navController) {
 
         this.dataList = dataList;
-        this.context = context;
-    }
+        this.navController = navController;
+     }
 
     @NonNull
     @Override
@@ -36,28 +41,39 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Language_Data_Model langModel = dataList.get(position);
-        holder.countryText.setText(langModel.getName());
-        holder.languageText.setText(langModel.getCountry());
-        holder.languageDescription.setText(langModel.getLanguageDescription());
-        //holder.crdVwClick.setOnClickListener(v -> listener.onLangCardClick(v));
+        CourseModel coursesDataModel = dataList.get(position);
+        holder.countryText.setText(coursesDataModel.getTitle());
+        holder.languageText.setText(coursesDataModel.getLevel());
+
+        holder.homeCard.setOnClickListener(v -> {
+
+            Bundle dataBundle = new Bundle();
+
+            dataBundle.putString("language_name", coursesDataModel.getLanguage());
+            dataBundle.putString("course_title", coursesDataModel.getTitle());
+            dataBundle.putString("course_level", coursesDataModel.getLevel());
+            dataBundle.putString("course_id", coursesDataModel.getKey()); // Adding course ID
+
+            // Use NavController to navigate to the next fragment
+            navController.navigate(R.id.action_languageHomeFragment_to_languageDetailFragment, dataBundle);
+        });
     }
 
     @Override
     public int getItemCount() {
         return  dataList.size();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView languageText, languageDescription, countryText;
-        LinearLayout crdVwClick;
+        TextView languageText, countryText;
+        RelativeLayout homeCard;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
             countryText = itemView.findViewById(R.id.countryTextView);
             languageText = itemView.findViewById(R.id.langTextView);
-            languageDescription = itemView.findViewById(R.id.description);
-            //crdVwClick = itemView.findViewById(R.id.cardHm);
+            homeCard = itemView.findViewById(R.id.cont);
         }
     }
 }

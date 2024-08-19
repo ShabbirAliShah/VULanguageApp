@@ -1,46 +1,45 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/cardHm"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="#FFC107"
-    android:backgroundTint="#FFC107"
-    android:layout_marginBottom="5dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#D1AB39"
     android:layout_margin="5dp"
     android:padding="10dp"
-    android:elevation="5dp">
+    android:elevation="10dp"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true">
 
-    <LinearLayout
-        android:id="@+id/cardHm"
+    <RelativeLayout
+        android:id="@+id/cont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#637D84"
-        android:orientation="vertical"
         android:clickable="true"
         android:paddingLeft="20dp"
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="20dp"
         android:textAlignment="center">
 
         <TextView
-            android:id="@+id/langTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Language:" />
-
-        <TextView
             android:id="@+id/countryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country" />
+            android:text="Country"
+            android:textSize="25sp"
+            />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/langTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="description:"
-            android:textStyle="bold" />
+            android:layout_below="@id/countryTextView"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:text="Language:" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

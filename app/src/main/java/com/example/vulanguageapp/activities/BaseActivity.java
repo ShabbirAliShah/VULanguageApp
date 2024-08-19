@@ -1,15 +1,12 @@
 package com.example.vulanguageapp.activities;
-
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -17,71 +14,96 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.vulanguageapp.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected DrawerLayout drawerLayout;
     protected NavigationView navigationView;
-
     protected ActionBarDrawerToggle actionBarDrawerToggle;
+    protected FirebaseAuth mAuth;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onStart(){
+        super.onStart();
+        FirebaseUser currentUsr = mAuth.getCurrentUser();
+        if(currentUsr == null){
+
+            startActivity( new Intent(getApplicationContext(), login.class));
+            finish();
+        }
+    }
+
+    public String getUserId() {
+        FirebaseUser currentUsr = mAuth.getCurrentUser();
+        if (currentUsr != null) {
+            return currentUsr.getUid();
+        }
+        return null;
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_activity);
 
-        setupNavigationDrawer();
+        FirebaseApp.initializeApp(this);
+
+        setNavigationDrawer();
+
     }
 
-    private boolean setupNavigationDrawer() {
-
+    public boolean setNavigationDrawer(){
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
-        if (drawerLayout == null || navigationView == null) {
-            throw new NullPointerException("DrawerLayout or NavigationView is null. Check your layout file.");
+        mAuth = FirebaseAuth.getInstance();
+
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView user = headerView.findViewById(R.id.currentUser);
+        FirebaseUser currentUsr = mAuth.getCurrentUser();
+
+        if (currentUsr != null) {
+            // Set the user's display name or email to the TextView
+            user.setText(currentUsr.getEmail());
         }
 
-        // Setup action bar toggle (optional, for opening drawer from action bar)
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Handle navigation item clicks
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int itemId = item.getItemId();
+                int itemId = item.getItemId();
 
-            Log.d("BaseActivity", "Menu item clicked: " + itemId);
+                if (itemId == R.id.navHome) {
+                    startActivity(new Intent(BaseActivity.this, MainActivity.class));
+                } else if (itemId == R.id.quiz) {
+                    startActivity(new Intent(BaseActivity.this, QuizActivity.class));
+                }
+                else if (itemId == R.id.progress) {
+                    startActivity(new Intent(BaseActivity.this, GamificationActivity.class));
+                }
+                else if (itemId == R.id.lecture) {
+                    startActivity(new Intent(BaseActivity.this, ViewLectureActivity.class));
+                }
 
-            if (itemId == R.id.navHome) {
-                startActivity(new Intent(this, MainActivity.class));
-            } else if (itemId == R.id.languages) {
-                startActivity(new Intent(this, LanguageViewsActivity.class));
-            } else if (itemId == R.id.quiz) {
-                startActivity(new Intent(this, QuizActivity.class));
-            } else if (itemId == R.id.progress) {
-                startActivity(new Intent(this, GamificationActivity.class));
-            } else if (itemId == R.id.lecture) {
-                startActivity(new Intent(this, ViewLectureActivity.class));
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
-
-            drawerLayout.closeDrawer(GravityCompat.START); // Close drawer after handling selection
-            return true;
         });
-
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Log.d("BaseActivity", "Menu item clicked: " + item.getTitle()); // Check if this line gets triggered
-//                Toast.makeText(BaseActivity.this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//        });
-
         return false;
     }
 
+    // Method to set content in the FrameLayout container
     protected void setContent(int layoutResID) {
         FrameLayout container = findViewById(R.id.container);
         getLayoutInflater().inflate(layoutResID, container);
@@ -96,4 +118,3 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-

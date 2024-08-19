@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
 
     <item android:id="@+id/navHome"
@@ -14,8 +13,8 @@
     <item android:id="@+id/quiz"
         android:title="Quiz"
         android:icon="@drawable/ic_menu_camera"/>
+    </group>
 
-</group>
     <item android:title="Menu">
         <menu>
             <group android:checkableBehavior="single">
@@ -25,10 +24,6 @@
 
                 <item android:id="@+id/lecture"
                     android:title="Lesson"
-                    android:icon="@drawable/ic_menu_camera"/>
-
-                <item android:id="@+id/testActivity"
-                    android:title="Test Activity"
                     android:icon="@drawable/ic_menu_camera"/>
             </group>
         </menu>

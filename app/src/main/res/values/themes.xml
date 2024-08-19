@@ -8,7 +8,7 @@
     <style name="Theme.VULanguageApp" parent="Base.Theme.VULanguageApp" />
 
     <style name="Theme.VULanguageApp.NoActionBar">
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 

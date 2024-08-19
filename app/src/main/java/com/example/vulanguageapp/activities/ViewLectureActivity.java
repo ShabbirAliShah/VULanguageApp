@@ -2,18 +2,18 @@ package com.example.vulanguageapp.activities;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.databinding.ActivityViewLectureBinding;
 
-public class ViewLectureActivity extends BaseActivity {
-
-
-    private ActivityViewLectureBinding binding;
+public class ViewLectureActivity extends BaseActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_lecture);
+
+        setContent(R.layout.content_lesson_view);
 
     }
 }

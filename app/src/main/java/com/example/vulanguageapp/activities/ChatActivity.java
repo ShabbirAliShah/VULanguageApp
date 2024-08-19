@@ -2,16 +2,15 @@ package com.example.vulanguageapp.activities;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.databinding.ActivityChatBinding;
 
 public class ChatActivity extends BaseActivity {
-
-    private ActivityChatBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContent(R.layout.activity_chat);
+        setContent(R.layout.content_chat);
     }
 }

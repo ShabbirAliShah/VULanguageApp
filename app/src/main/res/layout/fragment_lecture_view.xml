@@ -9,51 +9,43 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_width="390dp"
+        android:layout_height="370dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <WebView
-            android:id="@+id/webview_youtube"
+            android:id="@+id/youtubeWebView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
+        android:layout_height="463dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" >
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="404dp"
+            android:layout_height="264dp"
+            android:text="@string/lorem_ipsum"
             android:textSize="14sp"
-            android:text="@string/lorem_ipsum">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintVertical_bias="0.141">
 
         </TextView>
-    </LinearLayout>
 
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="600dp">-->
 
-<!--        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-<!--            android:id="@+id/youtube_player_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:autoPlay="false"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:videoId="Umjvt_Vkn1Q" />-->
+    </ScrollView>
 
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

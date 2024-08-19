@@ -2,16 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/languageViewFragment">
+    android:id="@+id/home_nav"
+    app:startDestination="@id/languageHomeFragment">
 
     <fragment
-        android:id="@+id/languageViewFragment"
-        android:name="com.example.vulanguageapp.fragments.LanguageViewFragment"
-        android:label="fragment_language_view"
-        tools:layout="@layout/fragment_language_view" >
+        android:id="@+id/languageHomeFragment"
+        android:name="com.example.vulanguageapp.fragments.LanguageHomeFragment"
+        android:label="fragment_language__home_"
+        tools:layout="@layout/fragment_language__home_" >
         <action
-            android:id="@+id/action_languageViewFragment_to_languageDetailFragment"
+            android:id="@+id/action_languageHomeFragment_to_languageDetailFragment"
             app:destination="@id/languageDetailFragment" />
     </fragment>
     <fragment
@@ -20,16 +20,20 @@
         android:label="fragment_language_detail"
         tools:layout="@layout/fragment_language_detail" >
         <action
-            android:id="@+id/action_languageDetailFragment_to_languageViewFragment"
-            app:destination="@id/languageViewFragment" />
-        <action
             android:id="@+id/action_languageDetailFragment_to_topicToEnrollFragment"
             app:destination="@id/topicToEnrollFragment" />
+        <action
+            android:id="@+id/action_languageDetailFragment_to_wishListFragment"
+            app:destination="@id/wishListFragment" />
     </fragment>
     <fragment
         android:id="@+id/topicToEnrollFragment"
         android:name="com.example.vulanguageapp.fragments.TopicToEnrollFragment"
         android:label="fragment_topic_to_enroll"
         tools:layout="@layout/fragment_topic_to_enroll" />
-
+    <fragment
+        android:id="@+id/wishListFragment"
+        android:name="com.example.vulanguageapp.fragments.WishListFragment"
+        android:label="fragment_wish_list"
+        tools:layout="@layout/fragment_wish_list" />
 </navigation>
