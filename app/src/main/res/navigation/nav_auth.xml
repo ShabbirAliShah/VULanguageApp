@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_auth"
+    app:startDestination="@id/userLoginFragment">
+
+    <fragment
+        android:id="@+id/userLoginFragment"
+        android:name="com.example.vulanguageapp.fragments.UserLoginFragment"
+        android:label="fragment_user_login"
+        tools:layout="@layout/fragment_user_login" >
+        <action
+            android:id="@+id/action_userLoginFragment_to_userRegisterationFragment"
+            app:destination="@id/userRegisterationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userRegisterationFragment"
+        android:name="com.example.vulanguageapp.fragments.UserRegisterationFragment"
+        android:label="fragment_user_registeration"
+        tools:layout="@layout/fragment_user_registeration" >
+        <action
+            android:id="@+id/action_userRegisterationFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsGeneralFragment"
+        android:name="com.example.vulanguageapp.fragments.SettingsGeneralFragment"
+        android:label="fragment_settings_general"
+        tools:layout="@layout/fragment_settings_profile" >
+        <action
+            android:id="@+id/action_settingsGeneralFragment_to_settingsMenuList"
+            app:destination="@id/settingsMenuList" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsMenuList"
+        android:name="com.example.vulanguageapp.fragments.SettingsMenuList"
+        android:label="fragment_settings_menu"
+        tools:layout="@layout/fragment_settings_menu" >
+        <action
+            android:id="@+id/action_settingsMenuList_to_settingsGeneralFragment"
+            app:destination="@id/settingsGeneralFragment" />
+    </fragment>
+</navigation>

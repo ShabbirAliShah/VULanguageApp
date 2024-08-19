@@ -1,27 +1,29 @@
 package com.example.vulanguageapp.models;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 public class Enrollment implements Serializable {
 
     private String courseId;
     private String courseTitle;
-    private List<String> selectedLessons;
+    private HashMap<String, Boolean> selectedLessons; // Using HashMap<String, Boolean> to store lessonId and isCompleted status
     private String userId;
 
     public Enrollment() {
         // Default constructor required for calls to DataSnapshot.getValue(Enrollment.class)
     }
 
-    public Enrollment(String courseId, String courseTitle, List<String> selectedLessons, String userId) {
+    public Enrollment(String courseId, String courseTitle, HashMap<String, Boolean> selectedLessons, String userId) {
         this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.selectedLessons = selectedLessons;
         this.userId = userId;
     }
 
-    // Getters and Setters
+    // Getters and setters for each field
+
     public String getCourseId() {
         return courseId;
     }
@@ -38,11 +40,11 @@ public class Enrollment implements Serializable {
         this.courseTitle = courseTitle;
     }
 
-    public List<String> getSelectedLessons() {
+    public HashMap<String, Boolean> getSelectedLessons() {
         return selectedLessons;
     }
 
-    public void setSelectedLessons(List<String> selectedLessons) {
+    public void setSelectedLessons(HashMap<String, Boolean> selectedLessons) {
         this.selectedLessons = selectedLessons;
     }
 

@@ -35,7 +35,7 @@ public class TopicsToStudyFragment extends Fragment{
     private List<LessonsModel> dataList = new ArrayList<>();
     private final List<String> lessonIds = new ArrayList<>();
     private RecyclerView recyclerView;
-    private String courseId;
+    private String courseId, lessonTitle;
     private NavController navController;
 
     @Override
@@ -45,7 +45,6 @@ public class TopicsToStudyFragment extends Fragment{
         if (getArguments() != null) {
 
             courseId = getArguments().getString("course_id");
-
         }
 
     }
@@ -67,6 +66,7 @@ public class TopicsToStudyFragment extends Fragment{
         return binding.getRoot();
     }
 
+
     private void fetchLessonIds() {
         DatabaseReference enrollmentsRef = FirebaseDatabase.getInstance().getReference("enrollments");
 
@@ -76,9 +76,11 @@ public class TopicsToStudyFragment extends Fragment{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 lessonIds.clear();
                 for (DataSnapshot enrollmentSnapshot : snapshot.getChildren()) {
-                    Enrollment enrollment = enrollmentSnapshot.getValue(Enrollment.class);
-                    if (enrollment != null && enrollment.getSelectedLessons() != null) {
-                        lessonIds.addAll(enrollment.getSelectedLessons());
+                    DataSnapshot selectedLessonsSnapshot = enrollmentSnapshot.child("selectedLessons");
+
+                    for (DataSnapshot lessonSnapshot : selectedLessonsSnapshot.getChildren()) {
+                        String lessonId = lessonSnapshot.getKey();
+                        lessonIds.add(lessonId);
                     }
                 }
                 // Fetch lessons data after retrieving lesson IDs
@@ -91,6 +93,9 @@ public class TopicsToStudyFragment extends Fragment{
             }
         });
     }
+
+
+
 
     private void fetchLessonsData() {
         DatabaseReference lessonsRef = FirebaseDatabase.getInstance().getReference("lessons");
