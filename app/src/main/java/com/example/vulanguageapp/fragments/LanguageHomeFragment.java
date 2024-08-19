@@ -80,6 +80,5 @@ public class LanguageHomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        recyclerView = null;
     }
 }

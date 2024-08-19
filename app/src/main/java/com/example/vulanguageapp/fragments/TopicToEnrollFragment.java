@@ -1,7 +1,5 @@
 package com.example.vulanguageapp.fragments;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class TopicToEnrollFragment extends Fragment {
@@ -43,7 +42,7 @@ public class TopicToEnrollFragment extends Fragment {
     private String courseTitle;
     private RecyclerView lessonsRecyclerView;
     private boolean isAlreadyEnrolled = false;
-    private List<String> selectedLessons = new ArrayList<>();
+    private HashMap<String, Boolean> selectedLessons = new HashMap<>();
     private Button continueToCourse;
 
     public TopicToEnrollFragment() {
@@ -132,10 +131,13 @@ public class TopicToEnrollFragment extends Fragment {
                     enrollNow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+
                             for (LessonsModel lesson : dataList2) {
                                 if (lesson.isSelected()) {
-                                    selectedLessons.add(lesson.getLessonId());
+                                    selectedLessons.put(lesson.getLessonId(), true);  // Use 'put' to add lessonId and its completion status
                                     Log.d("EnrollmentFragment", "Selected Lesson id: " + lesson.getLessonId());
+                                } else {
+                                    selectedLessons.put(lesson.getLessonId(), false);  // If not selected, you can mark it as false
                                 }
                             }
 

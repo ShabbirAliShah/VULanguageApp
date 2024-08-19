@@ -62,46 +62,43 @@ public class EnrolledCoursesFragment extends Fragment {
         return binding.getRoot();
     }
 
-//    private void fetchLessonIds() {
-//        DatabaseReference enrollmentsRef = FirebaseDatabase.getInstance().getReference("enrollments");
-//
-//        enrollmentsRef.orderByChild("courseId").equalTo(courseId).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                lessonIds.clear();
-//                for (DataSnapshot enrollmentSnapshot : snapshot.getChildren()) {
-//                    Enrollment enrollment = enrollmentSnapshot.getValue(Enrollment.class);
-//                    if (enrollment != null && enrollment.getSelectedLessons() != null) {
-//                        lessonIds.addAll(enrollment.getSelectedLessons());
-//                    }
-//                }
-//                // Fetch lessons data after retrieving lesson IDs
-//                fetchLessonsData();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.e("EnrolledCoursesFragment", "Failed to read lesson IDs.", error.toException());
-//            }
-//        });
-//    }
-
     private void fetchCourses() {
+
         DatabaseReference lessonsRef = FirebaseDatabase.getInstance().getReference("enrollments");
 
         lessonsRef.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataList.clear();
-                for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
 
-                        Enrollment enrolledCourses = courseSnapshot.getValue(Enrollment.class);
-                        if (enrolledCourses != null) {
-                            dataList.add(enrolledCourses);
+                dataList.clear();
+
+                for (DataSnapshot enrollmentSnapshot : snapshot.getChildren()) {
+                    Enrollment enrollment = new Enrollment();
+
+                    enrollment.setCourseId(enrollmentSnapshot.child("courseId").getValue(String.class));
+                    enrollment.setCourseTitle(enrollmentSnapshot.child("courseTitle").getValue(String.class));
+                    enrollment.setUserId(enrollmentSnapshot.child("userId").getValue(String.class));
+
+                    DataSnapshot selectedLessonsSnapshot = enrollmentSnapshot.child("selectedLessons");
+                    HashMap<String, Boolean> selectedLessons = new HashMap<>();
+
+                    for (DataSnapshot lessonSnapshot : selectedLessonsSnapshot.getChildren()) {
+                        String lessonId = lessonSnapshot.getKey();
+                        Boolean isCompleted = lessonSnapshot.child("isCompleted").getValue(Boolean.class);
+
+                        if (isCompleted != null) {
+                            selectedLessons.put(lessonId, isCompleted);
                         }
+                    }
+
+                    enrollment.setSelectedLessons(selectedLessons);
+
+                    // Add the enrollment to your list
+                    dataList.add(enrollment);
                 }
 
+                // Set up the adapter and notify data changes
                 LessonActivityAdapter adapter = new LessonActivityAdapter(dataList, navController);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -113,4 +110,5 @@ public class EnrolledCoursesFragment extends Fragment {
             }
         });
     }
+
 }

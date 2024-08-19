@@ -1,6 +1,7 @@
 package com.example.vulanguageapp.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,17 @@ import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.databinding.FragmentLectureViewBinding;
+import com.example.vulanguageapp.models.LessonsModel;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 public class LectureViewFragment extends Fragment {
 
     private FragmentLectureViewBinding binding;
-    private WebView webView;
 
     public LectureViewFragment() {
 
@@ -42,6 +44,13 @@ public class LectureViewFragment extends Fragment {
         if (getArguments() != null){
 
             String videoUrl = getArguments().getString("link");
+            String lessonTitle = getArguments().getString("lesson_title");
+            String lessonId = getArguments().getString("lesson_id");
+
+            binding.lessonViewTitle.setText(lessonTitle);
+
+            Log.d("LectureViewFragment", "lesson title" + lessonTitle);
+            Log.d("LectureViewFragment", "lesson Id " + lessonId);
 
             WebView youtubeWebView = view.findViewById(R.id.youtubeWebView);
 
@@ -56,6 +65,12 @@ public class LectureViewFragment extends Fragment {
 
             // Ensure links open in the WebView instead of an external browser
             youtubeWebView.setWebViewClient(new WebViewClient());
+
+            binding.viewFlashCard.setOnClickListener(v->{
+                Bundle dataBundle = new Bundle();
+                dataBundle.putString("lesson_id", lessonId);
+                NavHostFragment.findNavController(this).navigate(R.id.action_lectureViewFragment_to_flashCardsFragment, dataBundle);
+            });
         }
 
     }

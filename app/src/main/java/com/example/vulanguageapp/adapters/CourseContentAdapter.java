@@ -1,6 +1,7 @@
 package com.example.vulanguageapp.adapters;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,10 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
 
             Bundle dataBundle = new Bundle();
             dataBundle.putString("link", lessonsModel.getVideoLink());
+            dataBundle.putString("lesson_title", lessonsModel.getTitle());
+            dataBundle.putString("lesson_id", lessonsModel.getLessonId());
+
+            Log.d("CourseContentAdapter", "Lesson_id " + lessonsModel.getLessonId());
 
             navController.navigate(R.id.action_topicsToStudyFragment_to_lectureViewFragment, dataBundle);
         });

@@ -1,7 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.VULanguageApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
+
+<!-- Dark Theme -->
+<style name="Theme.VULanguageApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!-- Customize your dark theme here -->
+    <item name="colorPrimary">#42A3ED</item>
+    <item name="colorPrimaryVariant">#214A6A</item>
+    <item name="colorSecondary">#12CCC7</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <item name="android:statusBarColor" tools:targetApi="l">#42A3ED</item>
+    <item name="android:windowLightStatusBar">false</item>
+</style>
+
 </resources>
+
