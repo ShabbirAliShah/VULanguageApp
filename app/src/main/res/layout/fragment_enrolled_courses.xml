@@ -11,4 +11,27 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/card_view_for_enrolled_courses" />
 
+    <RelativeLayout
+        android:id="@+id/noCoursesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"> <!-- Initially hidden -->
+
+        <TextView
+            android:id="@+id/noCoursesMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are not enrolled in any course yet."
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/goToCoursesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to Courses List"
+            android:layout_below="@id/noCoursesMessage"
+            android:layout_marginTop="16dp"/>
+
+    </RelativeLayout>
+
 </FrameLayout>

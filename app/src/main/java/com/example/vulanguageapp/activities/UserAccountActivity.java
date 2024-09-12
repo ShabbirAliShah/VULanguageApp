@@ -20,10 +20,13 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.adapters.CustomExpandableListAdapter;
 import com.example.vulanguageapp.fragments.SettingsGeneralFragment;
+import com.example.vulanguageapp.fragments.UserLoginFragment;
 import com.example.vulanguageapp.interfaces.UserIdProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//Fragments contained in this activity;
+//UserLoginFragment, UserRegistrationFragment, SettingsGeneralFragment;
 public class UserAccountActivity extends AppCompatActivity implements UserIdProvider {
 
     @Override
@@ -32,26 +35,12 @@ public class UserAccountActivity extends AppCompatActivity implements UserIdProv
         setContentView(R.layout.activity_user_account);
 
 
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//            String fragmentToOpen = intent.getStringExtra("openFragment");
-//            boolean isNavigation = intent.getBooleanExtra("isNavigation", false); // Add this line
-//            if ("SettingsMenuList".equals(fragmentToOpen) && isNavigation) { // Modify this line
-//                // Navigate to SettingsFragment
-//                NavHostFragment navHostFragment =
-//                        (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.userAccountFragmentContainerView);
-//                NavController navController = navHostFragment.getNavController();
-//                navController.navigate(R.id.settingsMenuList);
-//            }
-//        }
-
         Intent intent = getIntent();
         if (intent != null) {
             String fragmentToOpen = intent.getStringExtra("openFragment");
             boolean isNavigation = intent.getBooleanExtra("isNavigation", false);
 
             if ("SettingsMenuList".equals(fragmentToOpen) && isNavigation) {
-                // Ensure that the fragment retrieved is a NavHostFragment
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.userAccountFragmentContainerView);
 
                 if (fragment instanceof NavHostFragment) {
@@ -59,7 +48,6 @@ public class UserAccountActivity extends AppCompatActivity implements UserIdProv
                     NavController navController = navHostFragment.getNavController();
                     navController.navigate(R.id.settingsMenuList);
                 } else {
-                    // Handle case when it's not a NavHostFragment
                     Log.e("Navigation Error", "Fragment is not a NavHostFragment.");
                 }
             }
@@ -68,9 +56,14 @@ public class UserAccountActivity extends AppCompatActivity implements UserIdProv
 
     }
 
+
     @Override
     public String getUserId() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        return currentUser != null ? currentUser.getUid() : null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            return user.getUid();  // Return the Firebase User ID (UID)
+        } else {
+            return null;  // Return null if the user is not logged in
+        }
     }
 }

@@ -7,31 +7,42 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_for_course_content"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:textAlignment="center"
-        app:cardCornerRadius="1dp"
-        android:elevation="5dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="10dp"
+        app:contentPadding="5dp"
         app:cardUseCompatPadding="true"
-        android:backgroundTint="#F2F4F0"
+        android:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/lessonsToStudy"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:text="This is the exampl of topic one."
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<LinearLayout
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/lessonsToStudy"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="This is the exampl of topic one."
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/statustext"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="isComplete"
+        android:textSize="18sp" />
+
+</LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

@@ -40,6 +40,8 @@ public class GamificationAdapter extends RecyclerView.Adapter<GamificationAdapte
         FlashCardModel flashCard = dataList.get(position);
 
         holder.cardText.setText(flashCard.getCardText());
+        holder.inLanguageText.setText(flashCard.getInLanguageText());
+        holder.cardBackText.setText(flashCard.getCardBackText());
 
     }
 
@@ -50,12 +52,14 @@ public class GamificationAdapter extends RecyclerView.Adapter<GamificationAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView flashCardIcon;
-        TextView cardText;
+        TextView cardText, inLanguageText, cardBackText;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
             flashCardIcon = itemView.findViewById(R.id.cardIcon);
             cardText = itemView.findViewById(R.id.cardText);
+            inLanguageText = itemView.findViewById(R.id.inLanguageText);
+            cardBackText = itemView.findViewById(R.id.cardBackText);
         }
     }
 }

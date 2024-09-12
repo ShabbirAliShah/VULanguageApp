@@ -27,7 +27,7 @@ import java.util.List;
 public class Create_Course extends Fragment {
 
     private FirebaseFirestore db;
-    private EditText languageName, lessonTitle, lessonList, level;
+    private EditText languageName, lessonTitle, lessonList, level, description;
 
 
     public Create_Course() {
@@ -51,6 +51,8 @@ public class Create_Course extends Fragment {
         languageName = view.findViewById(R.id.languageName);
         lessonTitle = view.findViewById(R.id.addlessonTitle);
         lessonList = view.findViewById(R.id.addLessonList);
+        description = view.findViewById(R.id.course_Descripton);
+
         level = view.findViewById(R.id.level);
 
         Button save = view.findViewById(R.id.save);
@@ -61,6 +63,7 @@ public class Create_Course extends Fragment {
         // Get data from EditTexts
         String language = languageName.getText().toString();
         String lesson_title = lessonTitle.getText().toString();
+        String courseDescription = description.getText().toString();
         String proficiency = level.getText().toString();
         String lesson_list = lessonList.getText().toString().trim();
 
@@ -88,7 +91,7 @@ public class Create_Course extends Fragment {
         String lessonKey = database.push().getKey();
 
         // Create a LessonsModel object with your data
-        CourseModel newCourse = new CourseModel(language,proficiency, lesson_title,lessonKey,lessonlist);
+        CourseModel newCourse = new CourseModel(language,proficiency, lesson_title,lessonKey,lessonlist, courseDescription);
 
         Log.d("AddLessons", "New lesson created with key: " + lessonKey);
 
@@ -126,6 +129,5 @@ public class Create_Course extends Fragment {
 //                    Toast.makeText(requireContext(), "Failed to insert data", Toast.LENGTH_SHORT).show();
 //                    Log.e("AddLessons", "Failed to insert data.", e);
 //                });
-
     }
 }

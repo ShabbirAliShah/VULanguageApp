@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context=".fragments.WishListFragment">
 
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wish list"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wishLIstRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="Wish list will be displayed here" />
+        android:padding="10dp"
+        tools:listitem="@layout/card_view_for_wish_list"
+        android:layout_marginTop="40dp"/>
 
 </FrameLayout>

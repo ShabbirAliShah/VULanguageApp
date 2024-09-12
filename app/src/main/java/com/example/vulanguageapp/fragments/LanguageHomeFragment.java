@@ -1,6 +1,7 @@
 package com.example.vulanguageapp.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,22 +52,26 @@ public class LanguageHomeFragment extends Fragment {
        NavController navController = NavHostFragment.findNavController(this);
 
         FirebaseDatabase.getInstance().getReference("courses").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
 
+                ActivityAdapter activityAdapter = new ActivityAdapter(dataList, navController);
+                recyclerView.setAdapter(activityAdapter);
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
                     CourseModel courseDataModel = dataSnapshot.getValue(CourseModel.class);
 
                     if (courseDataModel != null) {
                         String courseId = dataSnapshot.getKey();
+                        Log.d("Language Home Fragment", "courseId" + courseId);
                         courseDataModel.setKey(courseId);
 
                         dataList.add(courseDataModel);
                     }
 
-                    ActivityAdapter activityAdapter = new ActivityAdapter(dataList, navController);
-                    recyclerView.setAdapter(activityAdapter);
                 }
             }
 

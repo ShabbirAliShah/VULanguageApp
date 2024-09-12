@@ -38,11 +38,11 @@ public class UserRegisterationFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserRegisterationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         goToLogin.findViewById(R.id.goToLogin);
-        goToLogin.setOnClickListener(v ->{
+        goToLogin.setOnClickListener(v -> {
             NavController navController = NavHostFragment.findNavController(this);
             navController.navigate(R.id.action_userRegisterationFragment_to_userLoginFragment);
         });
@@ -104,12 +104,12 @@ public class UserRegisterationFragment extends Fragment {
         });
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUsr = mAuth.getCurrentUser();
-//        if (currentUsr != null) {
-//            currentUsr.reload();
-//        }
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUsr = mAuth.getCurrentUser();
+        if (currentUsr != null) {
+            currentUsr.reload();
+        }
+    }
 }

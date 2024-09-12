@@ -9,15 +9,17 @@ public class CourseModel implements Serializable {
     private String language;
     private String level;
     private String title;
-    private String key; // For storing course ID
+    private String courseKey; // For storing course ID
     private List<String> lessons; // For storing lessons
+    private String courseDescription;
 
-    public CourseModel(String language, String level, String title, String key, List<String> lessons) {
+    public CourseModel(String language, String level, String title, String courseKey, List<String> lessons, String courseDescription) {
         this.language = language;
         this.level = level;
         this.title = title;
-        this.key = key;
+        this.courseKey = courseKey;
         this.lessons = lessons;
+        this.courseDescription = courseDescription;
     }
     public CourseModel(){
 
@@ -36,15 +38,23 @@ public class CourseModel implements Serializable {
         return title;
     }
 
-    public String getKey() {
-        return key;
+    public String getCourseKey() {
+        return courseKey;
     }
 
     public List<String> getLessons() {
         return lessons;
     }
 
+    public String getCourseDescription() {
+        return courseDescription;
+    }
+
     // Setters
+    public void setCourseDescription(String courseDescription){
+        this.courseDescription = courseDescription;
+    }
+
     public void setLanguage(String language) {
         this.language = language;
     }
@@ -58,7 +68,7 @@ public class CourseModel implements Serializable {
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.courseKey = key;
     }
 
     public void setLessons(ArrayList<String> lessons) {

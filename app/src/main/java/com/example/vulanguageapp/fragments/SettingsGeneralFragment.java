@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,6 @@ public class SettingsGeneralFragment extends Fragment {
     private UserIdProvider userIdProvider;
     private String userId;
     private String selectedChild;
-
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
@@ -66,7 +66,6 @@ public class SettingsGeneralFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +81,8 @@ public class SettingsGeneralFragment extends Fragment {
 
 
         userId = userIdProvider.getUserId();
+
+        Toast.makeText(getContext(), "User Id is " + userId, Toast.LENGTH_SHORT).show();
 
         // Handle passed arguments
         Bundle bundle = getArguments();
@@ -164,6 +165,13 @@ public class SettingsGeneralFragment extends Fragment {
     }
 
     private void saveOrUpdateUser() {
+        // Get the userId from the userIdProvider
+        String userId = userIdProvider.getUserId();
+
+        if (TextUtils.isEmpty(userId)) {
+            Toast.makeText(getContext(), "User ID is missing", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Get the input data from the EditText and Spinner fields
         String name = displayName.getText().toString().trim();
@@ -171,37 +179,28 @@ public class SettingsGeneralFragment extends Fragment {
         String proficiency = experienceLevel.getSelectedItem().toString();
 
         // Create a UserAccountModel object with the data
-        UserAccountModel userAccountModel = new UserAccountModel(userId, name, description, proficiency);
+        UserAccountModel userAccountModel = new UserAccountModel(userId, name, description, proficiency, "online");
 
-        // **Check if the user exists in Firebase:**
-        // Here, we're checking if a child node with the user's UID exists in the "users" node.
+        // Check if the user exists in Firebase
         databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // **This part checks if the user exists:**
-                // dataSnapshot.exists() returns true if the user ID node already exists.
                 if (dataSnapshot.exists()) {
-                    // **This part updates the user data if the user exists:**
-                    // We update the existing data with the new values from userAccountModel.
+                    // User exists, update the data
                     databaseReference.child(userId).setValue(userAccountModel)
                             .addOnSuccessListener(aVoid -> {
-                                // Data updated successfully
                                 Toast.makeText(getContext(), "Account updated successfully", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                // Failed to update data
                                 Toast.makeText(getContext(), "Failed to update account", Toast.LENGTH_SHORT).show();
                             });
                 } else {
-                    // **This part inserts new user data if the user does not exist:**
-                    // We create a new node with the user's UID and set its value to the new userAccountModel.
+                    // User doesn't exist, create a new one
                     databaseReference.child(userId).setValue(userAccountModel)
                             .addOnSuccessListener(aVoid -> {
-                                // Data inserted successfully
                                 Toast.makeText(getContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                // Failed to insert data
                                 Toast.makeText(getContext(), "Failed to create account", Toast.LENGTH_SHORT).show();
                             });
                 }
@@ -209,11 +208,11 @@ public class SettingsGeneralFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle potential errors here
                 Toast.makeText(getContext(), "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     @Override
     public void onDetach() {

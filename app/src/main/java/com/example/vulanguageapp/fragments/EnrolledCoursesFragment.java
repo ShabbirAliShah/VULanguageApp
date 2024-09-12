@@ -1,6 +1,7 @@
 package com.example.vulanguageapp.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.vulanguageapp.R;
+import com.example.vulanguageapp.activities.MainActivity;
 import com.example.vulanguageapp.adapters.LessonActivityAdapter;
 import com.example.vulanguageapp.databinding.FragmentEnrolledCoursesBinding;
 import com.example.vulanguageapp.models.Enrollment;
@@ -37,6 +42,9 @@ public class EnrolledCoursesFragment extends Fragment {
     private RecyclerView recyclerView;
     private final List<Enrollment> dataList = new ArrayList<>();
     private NavController navController;
+    private View noCoursesContainer;  // Container for the message and button
+    private TextView noCoursesMessage;
+    private Button goToCoursesButton;
 
     public EnrolledCoursesFragment() {
         // Required empty public constructor
@@ -52,10 +60,21 @@ public class EnrolledCoursesFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentEnrolledCoursesBinding binding = FragmentEnrolledCoursesBinding.inflate(inflater, container, false);
         recyclerView = binding.enrolledCoursesRv;
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
+        noCoursesContainer = binding.noCoursesContainer; // Assuming you have this container in your layout
+        noCoursesMessage = binding.noCoursesMessage; // TextView for the message
+        goToCoursesButton = binding.goToCoursesButton; // Button to go to courses list
 
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
         navController = NavHostFragment.findNavController(this);
-        //fetchLessonIds();
+
+        // Setup button click listener
+        goToCoursesButton.setOnClickListener(v -> {
+            // Navigate to the courses list
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            // Optionally, finish the current fragment's activity if you don't want users to go back to it
+            getActivity().finish();
+        });
 
         fetchCourses();
 
@@ -98,10 +117,21 @@ public class EnrolledCoursesFragment extends Fragment {
                     dataList.add(enrollment);
                 }
 
-                // Set up the adapter and notify data changes
-                LessonActivityAdapter adapter = new LessonActivityAdapter(dataList, navController);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if (dataList.isEmpty()) {
+                    // No enrolled courses, show message and button
+                    noCoursesContainer.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                    noCoursesMessage.setText("You are not enrolled in any course yet.");
+                } else {
+                    // Enrolled courses exist, show the RecyclerView
+                    noCoursesContainer.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+
+                    // Set up the adapter and notify data changes
+                    LessonActivityAdapter adapter = new LessonActivityAdapter(dataList, navController);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -110,5 +140,4 @@ public class EnrolledCoursesFragment extends Fragment {
             }
         });
     }
-
 }

@@ -41,6 +41,13 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
 
         LessonsModel lessonsModel = dataList.get(position);
         holder.lessonTitle.setText(lessonsModel.getTitle());
+
+        if (lessonsModel.getIsCompleted() != null && lessonsModel.getIsCompleted()) {
+            holder.statustext.setText("Complete");
+        } else {
+            holder.statustext.setText("upcomming");
+        }
+
         holder.card_for_course_content.setOnClickListener(view -> {
 
             Bundle dataBundle = new Bundle();
@@ -61,7 +68,7 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView lessonTitle;
+        TextView lessonTitle, statustext;
         CardView card_for_course_content;
 
         public ViewHolder(View itemView){
@@ -69,6 +76,7 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
 
             lessonTitle = itemView.findViewById(R.id.lessonsToStudy);
             card_for_course_content = itemView.findViewById(R.id.card_for_course_content);
+            statustext = itemView.findViewById(R.id.statustext);
         }
     }
 }

@@ -14,7 +14,7 @@
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#cc5533">
+        android:background="#FFFFFF">
 
         <TextView
             android:id="@+id/course_title"

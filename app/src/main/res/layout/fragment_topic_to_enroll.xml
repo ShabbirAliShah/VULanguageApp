@@ -28,17 +28,17 @@
             android:id="@+id/enrollmentStatusMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Please check/uncheck to select your lessons"
             android:textSize="20sp" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topic_list_to_enroll"
+        android:id="@+id/topicToEnroll"
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_marginTop="20dp"
-        android:background="@color/design_default_color_secondary_variant"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -49,21 +49,20 @@
         android:id="@+id/setEnroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
         android:text="Enroll Now"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topic_list_to_enroll" />
+        app:layout_constraintTop_toBottomOf="@+id/topicToEnroll" />
 
     <Button
-        android:text="Contitnue to course"
         android:id="@+id/continueToCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Contitnue to course"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/topic_list_to_enroll"
-        app:layout_constraintTop_toBottomOf="@+id/topic_list_to_enroll" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topicToEnroll" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

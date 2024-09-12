@@ -3,6 +3,7 @@ package com.example.vulanguageapp.models;
 public class FlashCardModel {
     private String courseId;
     private String cardText;
+    private String inLanguageText;
     private String cardBackText;
     private int cardImage;
 
@@ -10,11 +11,21 @@ public class FlashCardModel {
 
     }
 
-    public FlashCardModel(String courseId, String cardText, String cardBackText, int cardImage) {
+    public FlashCardModel(String courseId, String cardText,String inLanguageText, String cardBackText, int cardImage) {
         this.courseId = courseId;
         this.cardText = cardText;
         this.cardBackText = cardBackText;
         this.cardImage = cardImage;
+        this.inLanguageText = inLanguageText;
+    }
+
+    public String getInLanguageText() {
+        return inLanguageText;
+    }
+
+    public void setInLanguageText(String inLanguageText) {
+
+        this.inLanguageText = inLanguageText;
     }
 
     public int getCardImage() {

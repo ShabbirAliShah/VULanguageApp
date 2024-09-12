@@ -3,6 +3,7 @@ package com.example.vulanguageapp.adapters;
 import static android.app.PendingIntent.getActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         holder.countryText.setText(coursesDataModel.getTitle());
         holder.languageText.setText(coursesDataModel.getLevel());
 
+        Log.d("Activity Adapter", "Course Id " + coursesDataModel.getCourseKey());
+
         holder.homeCard.setOnClickListener(v -> {
 
             Bundle dataBundle = new Bundle();
@@ -52,8 +55,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             dataBundle.putString("language_name", coursesDataModel.getLanguage());
             dataBundle.putString("course_title", coursesDataModel.getTitle());
             dataBundle.putString("course_level", coursesDataModel.getLevel());
-            dataBundle.putString("course_id", coursesDataModel.getKey()); // Adding course ID
-
+            dataBundle.putString("course_id", coursesDataModel.getCourseKey());
+            dataBundle.putString("courseDescription", coursesDataModel.getCourseDescription());
             // Use NavController to navigate to the next fragment
             navController.navigate(R.id.action_languageHomeFragment_to_languageDetailFragment, dataBundle);
         });

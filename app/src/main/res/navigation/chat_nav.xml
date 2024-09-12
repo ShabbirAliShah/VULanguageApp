@@ -18,5 +18,9 @@
         android:id="@+id/chatConversationFragment"
         android:name="com.example.vulanguageapp.fragments.ChatConversationFragment"
         android:label="fragment_chat_conversation"
-        tools:layout="@layout/fragment_chat_conversation" />
+        tools:layout="@layout/fragment_chat_conversation" >
+        <action
+            android:id="@+id/action_chatConversationFragment_to_learnersOnlineFragment"
+            app:destination="@id/learnersOnlineFragment" />
+    </fragment>
 </navigation>

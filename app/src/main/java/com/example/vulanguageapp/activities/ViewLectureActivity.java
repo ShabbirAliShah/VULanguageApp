@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vulanguageapp.R;
 
-public class ViewLectureActivity extends BaseActivity
-{
+//Fragments contained in this activity;
+// EnrolledCourses, TopicsToStudy, LectureViewFragment, FlashCardsFragment;
+
+public class ViewLectureActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

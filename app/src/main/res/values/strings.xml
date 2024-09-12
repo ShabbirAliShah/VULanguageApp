@@ -75,11 +75,22 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="no_data_found">No data found</string>
+    <string name="wishlist">Add to WishList</string>
+    <string name="remove_from_wishlist">Remove wishlist</string>
 
     <string-array name="experience_levels">
         <item>Beginner</item>
         <item>Intermediate</item>
         <item>Expert</item>
     </string-array>
+
+    <string-array name="lesson_type">
+        <item>Grammar</item>
+        <item>Writing</item>
+        <item>Pronunciation</item>
+        <item>Exercise</item>
+    </string-array>
+
 
 </resources>

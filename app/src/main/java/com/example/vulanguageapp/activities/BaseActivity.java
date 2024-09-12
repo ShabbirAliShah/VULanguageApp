@@ -1,4 +1,5 @@
 package com.example.vulanguageapp.activities;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +18,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.adminControlls.activities.AdminDashboard;
+import com.example.vulanguageapp.interfaces.UserIdProvider;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements UserIdProvider {
 
     protected DrawerLayout drawerLayout;
     protected NavigationView navigationView;
@@ -41,13 +43,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public String getUserId() {
-        FirebaseUser currentUsr = mAuth.getCurrentUser();
-        if (currentUsr != null) {
-            return currentUsr.getUid();
-        }
-        return null;
-    }
+//    public String getUserId() {
+//        FirebaseUser currentUsr = mAuth.getCurrentUser();
+//        if (currentUsr != null) {
+//            return currentUsr.getUid();
+//        }
+//        return null;
+//    }
 
 
     @Override
@@ -95,6 +97,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                     startActivity(new Intent(BaseActivity.this, ViewLectureActivity.class));
                 } else if (itemId == R.id.admin) {
                     startActivity(new Intent(BaseActivity.this, AdminDashboard.class));
+                } else if (itemId == R.id.gamification) {
+                    startActivity(new Intent(BaseActivity.this, GamificationActivity.class));
                 } else if (itemId == R.id.settings) {
 
                     Intent intent = new Intent(BaseActivity.this, UserAccountActivity.class);
@@ -141,5 +145,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
+    }
+
+    @Override
+    public String getUserId() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return currentUser != null ? currentUser.getUid() : null;
     }
 }

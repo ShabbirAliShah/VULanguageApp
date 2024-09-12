@@ -69,7 +69,7 @@ public class UserLoginFragment extends Fragment {
         password = view.findViewById(R.id.loginpassword);
         progressBar = view.findViewById(R.id.progressbar);
 
-        Button gotoReg = view.findViewById(R.id.register);
+        Button gotoReg = view.findViewById(R.id.goToRegister);
         Button loginButton = view.findViewById(R.id.login);
 
         mAuth = FirebaseAuth.getInstance();

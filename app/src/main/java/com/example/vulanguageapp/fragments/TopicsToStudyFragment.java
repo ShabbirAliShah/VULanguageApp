@@ -71,20 +71,24 @@ public class TopicsToStudyFragment extends Fragment{
         DatabaseReference enrollmentsRef = FirebaseDatabase.getInstance().getReference("enrollments");
 
         enrollmentsRef.orderByChild("courseId").equalTo(courseId).addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 lessonIds.clear();
+                Map<String, Boolean> lessonCompletionStatus = new HashMap<>();
                 for (DataSnapshot enrollmentSnapshot : snapshot.getChildren()) {
                     DataSnapshot selectedLessonsSnapshot = enrollmentSnapshot.child("selectedLessons");
 
                     for (DataSnapshot lessonSnapshot : selectedLessonsSnapshot.getChildren()) {
                         String lessonId = lessonSnapshot.getKey();
+                        Boolean isCompleted = lessonSnapshot.child("isCompleted").getValue(Boolean.class);
+
                         lessonIds.add(lessonId);
+                        if (isCompleted != null) {
+                            lessonCompletionStatus.put(lessonId, isCompleted);
+                        }
                     }
                 }
-                // Fetch lessons data after retrieving lesson IDs
-                fetchLessonsData();
+                fetchLessonsData(lessonCompletionStatus);
             }
 
             @Override
@@ -95,16 +99,8 @@ public class TopicsToStudyFragment extends Fragment{
     }
 
 
-
-
-    private void fetchLessonsData() {
+    private void fetchLessonsData(Map<String, Boolean> lessonCompletionStatus) {
         DatabaseReference lessonsRef = FirebaseDatabase.getInstance().getReference("lessons");
-
-        // Create a map to hold lesson IDs
-        Map<String, Object> lessonIdMap = new HashMap<>();
-        for (String lessonId : lessonIds) {
-            lessonIdMap.put(lessonId, true);
-        }
 
         lessonsRef.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -113,9 +109,11 @@ public class TopicsToStudyFragment extends Fragment{
                 dataList.clear();
                 for (DataSnapshot lessonSnapshot : snapshot.getChildren()) {
                     String lessonId = lessonSnapshot.getKey();
-                    if (lessonIdMap.containsKey(lessonId)) {
+                    if (lessonIds.contains(lessonId)) {
                         LessonsModel lesson = lessonSnapshot.getValue(LessonsModel.class);
                         if (lesson != null) {
+                            // Pass the isCompleted status to the LessonsModel if necessary
+                            lesson.setIsCompleted(lessonCompletionStatus.get(lessonId));
                             dataList.add(lesson);
                         }
                     }
@@ -132,6 +130,7 @@ public class TopicsToStudyFragment extends Fragment{
             }
         });
     }
+
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

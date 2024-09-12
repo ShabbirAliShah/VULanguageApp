@@ -36,7 +36,6 @@ public class FlashCardsFragment extends Fragment {
     private RecyclerView cardRecyclerView;
     private GamificationAdapter gamificationAdapter;
 
-
     public FlashCardsFragment() {
         // Required empty public constructor
     }
@@ -50,7 +49,7 @@ public class FlashCardsFragment extends Fragment {
         cardRecyclerView = binding.flashcardRecyclerView;
 
         if (getContext() != null) {
-            cardRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            cardRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         }
 
         // Inflate the layout for this fragment

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_lectureViewFragment_to_flashCardsFragment"
             app:destination="@id/flashCardsFragment" />
+        <action
+            android:id="@+id/action_lectureViewFragment_to_pronunciationExecerciseFragment"
+            app:destination="@id/pronunciationExecerciseFragment" />
     </fragment>
     <fragment
         android:id="@+id/enrolledCoursesFragment"
@@ -37,4 +40,9 @@
         android:name="com.example.vulanguageapp.fragments.FlashCardsFragment"
         android:label="fragment_flash_cards"
         tools:layout="@layout/fragment_flash_cards" />
+    <fragment
+        android:id="@+id/pronunciationExecerciseFragment"
+        android:name="com.example.vulanguageapp.fragments.PronunciationExecerciseFragment"
+        android:label="fragment_pronunciation_execercise"
+        tools:layout="@layout/fragment_pronunciation_execercise" />
 </navigation>

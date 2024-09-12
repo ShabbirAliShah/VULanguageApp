@@ -15,13 +15,14 @@ public class LessonsModel {
     private List<Map<String, Object>> quiz;
     private String title;
     private String videoLink;
-    private boolean selected;
+    private Boolean selected;
+    private Boolean isCompleted;
 
     public LessonsModel() {
         // Default constructor required for calls to DataSnapshot.getValue(LessonsModel.class)
     }
 
-    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, boolean selected, List<String> flashCards, List<String> exercises  ) {
+    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, boolean selected, List<String> flashCards, List<String> exercises , Boolean isCompleted) {
 
         this.lessonId = lessonId;
         this.audioLink = audioLink;
@@ -33,6 +34,7 @@ public class LessonsModel {
         this.selected = selected;
         this.flashCards = flashCards;
         this.exercises = exercises;
+        this.isCompleted = isCompleted;
     }
 
     public String getLessonId() {
@@ -113,5 +115,13 @@ public class LessonsModel {
 
     public void setFlashCards(List<String> flashCards) {
         this.flashCards = flashCards;
+    }
+
+    public Boolean getIsCompleted() {  // Add this getter
+        return isCompleted;
+    }
+
+    public void setIsCompleted(Boolean isCompleted) {  // Add this setter
+        this.isCompleted = isCompleted;
     }
 }
