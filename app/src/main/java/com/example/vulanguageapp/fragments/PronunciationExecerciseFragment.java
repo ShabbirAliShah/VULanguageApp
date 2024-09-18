@@ -1,8 +1,12 @@
 package com.example.vulanguageapp.fragments;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -35,8 +39,15 @@ public class PronunciationExecerciseFragment extends Fragment {
     private RecyclerView recyclerView;
     private PronunciationAdapter pronunciationAdapter;
     private PronunciationModel pronunciationModel;
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private boolean permissionToRecordAccepted = false;
+    private String[] permissions = {Manifest.permission.RECORD_AUDIO};
+    private Context context;
 
 
+    public PronunciationExecerciseFragment(Context context) {
+        this.context = context;
+    }
     public PronunciationExecerciseFragment() {
         // Required empty public constructor
     }
@@ -44,6 +55,7 @@ public class PronunciationExecerciseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.requestPermissions(requireActivity(), permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
     }
 
@@ -70,9 +82,10 @@ public class PronunciationExecerciseFragment extends Fragment {
 
             Toast.makeText(getContext(), "Lesson Id is " + lessonId, Toast.LENGTH_SHORT).show();
 
-            Query query = FirebaseDatabase.getInstance().getReference("vocabulary").orderByChild("lessonId").equalTo(lessonId);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("vocabulary");
+            Query query = databaseReference.orderByChild("lessonId").equalTo(lessonId);
 
-            query.addValueEventListener(new ValueEventListener() {
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,7 +103,7 @@ public class PronunciationExecerciseFragment extends Fragment {
                         }
                     }
 
-                    pronunciationAdapter = new PronunciationAdapter(vocabDataList, navController);
+                    pronunciationAdapter = new PronunciationAdapter(vocabDataList, context, "Hindi");
                     recyclerView.setAdapter(pronunciationAdapter);
 
                     pronunciationAdapter.notifyDataSetChanged();
@@ -103,6 +116,14 @@ public class PronunciationExecerciseFragment extends Fragment {
             });
         }else {
             Toast.makeText(getContext(), "No lesson Id found or you may came wrong way.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            permissionToRecordAccepted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
         }
     }
 }

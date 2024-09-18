@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.vulanguageapp.adapters.GamificationAdapter;
 import com.example.vulanguageapp.databinding.FragmentFlashCardsBinding;
@@ -40,6 +41,22 @@ public class FlashCardsFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Get flashcard IDs from arguments
+        ArrayList<String> flashCardIdArray = getArguments().getStringArrayList("flashcardIdArray");
+        language = getArguments().getString("language");
+
+        // Fetch flashcards from Firebase based on the flashcard IDs
+        if (flashCardIdArray != null && !flashCardIdArray.isEmpty()) {
+            fetchFlashcards(flashCardIdArray);  // Call fetchFlashcards method to load flashcards
+        } else {
+            Toast.makeText(getContext(), "No flashcards available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -56,47 +73,34 @@ public class FlashCardsFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d("Falshcards fragment onViewCreated ", " just check  " );
-        language = getArguments().getString("language");
+        Log.d("Flashcards fragment onViewCreated", " just check");
 
         gamificationAdapter = new GamificationAdapter(cardDatalist, getContext(), language);
         cardRecyclerView.setAdapter(gamificationAdapter);
-
-        fetchFlashCards();
     }
 
-    private void fetchFlashCards() {
+    private void fetchFlashcards(ArrayList<String> flashCardIdArray) {
+        DatabaseReference flashcardsRef = FirebaseDatabase.getInstance().getReference("flashcards");
 
-        if (getArguments() != null) {
-
-            Log.d("Falshcards  ", "card language  " + language);
-
-            DatabaseReference flashcardsRef = FirebaseDatabase.getInstance().getReference("flashcards");
-            Query cardWithLessonRef = flashcardsRef.orderByChild("forLanguage").equalTo(language);
-
-            cardWithLessonRef.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                cardDatalist.clear();
-                for (DataSnapshot flashcardSnapShot : snapshot.getChildren()) {
-                    FlashCardModel flashcard = flashcardSnapShot.getValue(FlashCardModel.class);
-                    if (flashcard != null) {
-                        cardDatalist.add(flashcard);
+        // Loop through each flashcard ID and fetch its data
+        for (String flashCardId : flashCardIdArray) {
+            flashcardsRef.child(flashCardId).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DataSnapshot snapshot = task.getResult();
+                    if (snapshot.exists()) {
+                        FlashCardModel flashcard = snapshot.getValue(FlashCardModel.class);
+                        if (flashcard != null) {
+                            cardDatalist.add(flashcard);  // Add flashcard to list
+                            gamificationAdapter.notifyDataSetChanged();  // Notify adapter
+                        }
                     }
+                } else {
+                    Toast.makeText(getContext(), "Error fetching flashcards", Toast.LENGTH_SHORT).show();
                 }
-
-                gamificationAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("EnrolledCoursesFragment", "Failed to read lesson data.", error.toException());
-            }
-        });
+            });
         }
     }
 

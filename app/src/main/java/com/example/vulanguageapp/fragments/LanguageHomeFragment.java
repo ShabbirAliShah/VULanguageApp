@@ -71,7 +71,6 @@ public class LanguageHomeFragment extends Fragment {
 
                         dataList.add(courseDataModel);
                     }
-
                 }
             }
 

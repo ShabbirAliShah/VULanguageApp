@@ -4,3 +4,11 @@ plugins {
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.android.library) apply false
 }
+
+//allprojects {
+//    configurations.all {
+//        resolutionStrategy {
+//            force("org.jetbrains:annotations:12.0")
+//        }
+//    }
+//}

@@ -79,9 +79,6 @@ public class ChatConversationFragment extends Fragment {
             }
         });
 
-
-
-
         chatAdapter = new ChatAdapter(messageList, currentUserId);
         recyclerView.setAdapter(chatAdapter);
 

@@ -38,7 +38,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -50,7 +49,6 @@ import java.util.List;
 
 public class Create_Course extends Fragment {
 
-    private FirebaseFirestore db;
     private EditText lessonTitle, inLanguge, pronunciation, cardBackText, description;
     private Spinner level, languageSpinner, languageSpinner1;
     private static final int PICK_IMAGE = 1;
@@ -78,7 +76,6 @@ public class Create_Course extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        db = FirebaseFirestore.getInstance();
 
         languageSpinner = view.findViewById(R.id.language_Name);
         lessonTitle = view.findViewById(R.id.addlessonTitle);

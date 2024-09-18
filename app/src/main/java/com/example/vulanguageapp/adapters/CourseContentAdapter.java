@@ -51,12 +51,20 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
         boolean isLessonCompleted = isLessonCompleted(lesson.getLessonId());
         holder.checkBoxStatus.setChecked(isLessonCompleted);
 
-        holder.lessonClick.setOnClickListener(v-> {
+        holder.lessonClick.setOnClickListener(v -> {
+
             Bundle dataBundle = new Bundle();
             dataBundle.putString("link", lesson.getVideoLink());
             dataBundle.putString("lesson_title", lesson.getTitle());
             dataBundle.putString("lesson_id", lesson.getLessonId());
-            //dataBundle.putSerializable("flashcard_id_list", lesson.getFlashCards());
+            dataBundle.putString("courseId", lesson.getCourseId());
+
+            ArrayList<String> flashCardIds = lesson.getFlashCards();
+            if (flashCardIds != null && !flashCardIds.isEmpty()) {
+                dataBundle.putStringArrayList("flashcard_id_list", flashCardIds);
+            } else {
+                Log.e("CourseContentAdapter", "Flashcard IDs are null or empty for lesson: " + lesson.getLessonId());
+            }
 
             Log.d("CourseContentAdapter", "Lesson_id " + lesson.getLessonId());
 

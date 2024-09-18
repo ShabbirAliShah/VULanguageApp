@@ -2,52 +2,40 @@ package com.example.vulanguageapp.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.browse.MediaBrowser;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.media3.common.MediaItem;
+import androidx.media3.common.util.UnstableApi;
+import androidx.media3.common.util.Util;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.ui.PlayerControlView;
+import androidx.media3.ui.PlayerView;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.databinding.FragmentLectureViewBinding;
 import com.example.vulanguageapp.interfaces.UserIdProvider;
-import com.example.vulanguageapp.models.LessonsModel;
 import com.example.vulanguageapp.services.VideoService;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.PlaybackException;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.util.Util;
-import com.google.android.gms.games.Player;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
+@UnstableApi
 public class LectureViewFragment extends Fragment {
 
     private FragmentLectureViewBinding binding;
@@ -56,11 +44,14 @@ public class LectureViewFragment extends Fragment {
     private TextView statusTextView;
     private Bundle dataBundle;
     private String lessonId;
-    private PlayerView playerView;
-    private ExoPlayer player;
     private String videoUrl;
     private UserIdProvider userIdProvider;
     private String userId;
+    private ExoPlayer player;
+    private PlayerView playerView;
+    private ArrayList<String> flashCardIdArray;
+    private String courseId;
+    private String languageName;
 
     public LectureViewFragment() {
     }
@@ -90,18 +81,30 @@ public class LectureViewFragment extends Fragment {
             videoUrl = getArguments().getString("link");
             String lessonTitle = getArguments().getString("lesson_title");
             lessonId = getArguments().getString("lesson_id");
+            courseId = getArguments().getString("courseId");
+
+            ArrayList<String> flashCardIdArray = getArguments().getStringArrayList("flashcard_id_list");
+
+            if (flashCardIdArray != null) {
+                Log.d("LectureViewFragment", "Received Flashcard IDs: " + flashCardIdArray);
+            } else {
+                Log.e("LectureViewFragment", "Flashcard IDs are null.");
+            }
 
             binding.lessonViewTitle.setText(lessonTitle);
 
             Log.d("LectureViewFragment", "lesson title: " + lessonTitle);
             Log.d("LectureViewFragment", "lesson Id: " + lessonId);
+            Log.d("LectureViewFragment", "Flashcard Id : " + flashCardIdArray);
+            fetchLanguageName();
 
             dataBundle = new Bundle();
 
             binding.viewFlashCard.setOnClickListener(v -> {
 
                 dataBundle.putString("lesson_id", lessonId);
-                dataBundle.putString("language", "hindi");
+                dataBundle.putStringArrayList("flashcardIdArray", flashCardIdArray);
+                dataBundle.putString("language", languageName);
                 NavHostFragment.findNavController(this).navigate(R.id.action_lectureViewFragment_to_flashCardsFragment, dataBundle);
             });
 
@@ -119,7 +122,7 @@ public class LectureViewFragment extends Fragment {
         }
 
         statusTextView = binding.markComplete;
-        playerView = binding.playerview;
+        playerView = binding.exoPlayer;
 
         return binding.getRoot();
     }
@@ -184,6 +187,7 @@ public class LectureViewFragment extends Fragment {
             }
         });
     }
+
     private void toggleLessonCompletionStatus() {
         lessonCompletionRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -204,14 +208,12 @@ public class LectureViewFragment extends Fragment {
                 }
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("UpdateLessonStatus", "Failed to toggle completion status.", error.toException());
             }
         });
     }
-
 
     private void updateStatusText(boolean isCompleted) {
         if (isCompleted) {
@@ -222,9 +224,8 @@ public class LectureViewFragment extends Fragment {
     }
 
     private void initializePlayer() {
-        // Create ExoPlayer instance
-        player = new ExoPlayer.Builder(getContext()).build();
-        playerView.setPlayer(player);
+
+        player = new ExoPlayer.Builder(requireContext()).build();
 
         // Prepare the media item
         Uri uri = Uri.parse(videoUrl); // Replace with your video URL
@@ -232,7 +233,24 @@ public class LectureViewFragment extends Fragment {
         player.setMediaItem(mediaItem);
         player.prepare();
         player.play();
+        playerView.setPlayer(player); // This connects the player to the view.
     }
+
+    private void fetchLanguageName(){
+
+        DatabaseReference courses = FirebaseDatabase.getInstance().getReference("courses");
+        courses.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                languageName = snapshot.child(courseId).child("language").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+     }
 
     public void handleBackPress() {
         if (player != null && player.isPlaying()) {
@@ -245,7 +263,7 @@ public class LectureViewFragment extends Fragment {
     private void startVideoService() {
         Intent serviceIntent = new Intent(getActivity(), VideoService.class);
         serviceIntent.putExtra("VIDEO_URL", videoUrl);
-        ContextCompat.startForegroundService(getActivity(), serviceIntent);
+        ContextCompat.startForegroundService(requireActivity(), serviceIntent);
     }
 
     @Override

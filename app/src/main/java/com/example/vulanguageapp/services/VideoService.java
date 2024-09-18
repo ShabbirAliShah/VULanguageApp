@@ -13,11 +13,11 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.media3.common.MediaItem;
+import androidx.media3.exoplayer.ExoPlayer;
 
 import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.activities.StudyActivity;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.MediaItem;
 
 public class VideoService extends Service {
     private ExoPlayer player;

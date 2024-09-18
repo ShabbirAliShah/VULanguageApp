@@ -19,6 +19,7 @@ public class CourseModel implements Serializable {
         this.courseKey = courseKey;
         this.courseDescription = courseDescription;
     }
+
     public CourseModel(){
 
     }

@@ -51,9 +51,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -188,7 +186,7 @@ public class AddLessons extends Fragment {
         String lessonKey = database.push().getKey();
 
         // Create a LessonsModel object with your data
-        LessonsModel newLesson = new LessonsModel(lessonKey, audioLink, contentType, courseId, imageLink, title, videoLink, exercises, flashcards);
+        LessonsModel newLesson = new LessonsModel(lessonKey, audioLink, contentType, courseId, imageLink, title, videoLink, (ArrayList<String>) exercises, flashcards);
 
         Log.d("AddLessons", "New lesson created with key: " + lessonKey);
 

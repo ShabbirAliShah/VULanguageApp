@@ -2,6 +2,9 @@ package com.example.vulanguageapp.models;
 
 public class PronunciationModel {
 
+    private String vocabText;
+    private String vocabDescription;
+
     public PronunciationModel() {
     }
 
@@ -9,9 +12,6 @@ public class PronunciationModel {
         this.vocabText = vocabText;
         this.vocabDescription = vocabDescription;
     }
-
-    private String vocabText;
-    private String vocabDescription;
 
     public String getVocabText() {
         return vocabText;

@@ -15,7 +15,7 @@ public class LessonsModel {
     private String contentType;
     private String courseId;
     private List<String> exercises;
-    private List<String> flashCards;
+    private ArrayList<String> flashCards = new ArrayList<>();
     private String imageLink;
     private List<Map<String, Object>> quiz;
     private String title;
@@ -30,7 +30,7 @@ public class LessonsModel {
         // Default constructor required for calls to DataSnapshot.getValue(LessonsModel.class)
     }
 
-    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, List<String> flashCards, List<String> exercises) {
+    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, ArrayList<String> flashCards, List<String> exercises) {
 
         this.lessonId = lessonId;
         this.audioLink = audioLink;
@@ -117,11 +117,12 @@ public class LessonsModel {
         this.exercises = exercises;
     }
 
-    public List<String> getFlashCards() {
+    public ArrayList<String> getFlashCards() {
         return flashCards;
     }
 
-    public void setFlashCards(List<String> flashCards) {
+
+    public void setFlashCards(ArrayList<String> flashCards) {
         this.flashCards = flashCards;
     }
 
