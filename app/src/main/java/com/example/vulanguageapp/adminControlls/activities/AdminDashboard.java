@@ -4,29 +4,18 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.adminControlls.fragments.AddLessons;
-import com.example.vulanguageapp.adminControlls.fragments.DashBoard;
-import com.example.vulanguageapp.adminControlls.fragments.FragmentAdapter;
+import com.example.vulanguageapp.adminControlls.adminAdapters.FragmentAdapter;
 import com.example.vulanguageapp.databinding.ActivityAdminDashboardBinding;
-import com.example.vulanguageapp.interfaces.BaseActivityInterface;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.ArrayList;
 
 public class AdminDashboard extends AppCompatActivity {
 
@@ -39,7 +28,6 @@ public class AdminDashboard extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         ActivityAdminDashboardBinding binding = ActivityAdminDashboardBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
 
         getSupportActionBar().hide();
@@ -61,10 +49,10 @@ public class AdminDashboard extends AppCompatActivity {
 //        NavController navController = navHostFragment.getNavController();
 //
 //
-//        binding.buttonAddLessons.setOnClickListener(v ->{
-//                    navController.navigate(R.id.action_dashBoard_to_addLessons);
+//        binding.goToManage.setOnClickListener(v ->{
+//                    navController.navigate(R.id.action_dashBoard_to_manage);
 //        });
-//
+
 //        binding.createCourse.setOnClickListener(v->{
 //            navController.navigate(R.id.action_dashBoard_to_create_Course);
 //        });

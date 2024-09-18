@@ -1,7 +1,5 @@
 package com.example.vulanguageapp.adapters;
 
-import static android.app.PendingIntent.getActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.activities.BaseActivity;
 import com.example.vulanguageapp.models.CourseModel;
 
 import java.util.ArrayList;
