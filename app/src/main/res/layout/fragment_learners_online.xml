@@ -37,9 +37,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/search_icon"
             android:contentDescription="Search" />
+
     </RelativeLayout>
 
     <!-- RecyclerView for displaying user list -->

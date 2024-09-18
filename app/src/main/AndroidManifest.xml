@@ -4,6 +4,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
 
     <application
         android:allowBackup="true"
@@ -15,6 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VULanguageApp"
         tools:targetApi="31">
+
+        <service
+            android:name=".services.VideoService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false" />
+
+
         <activity
             android:name=".activities.SplashScreen"
             android:exported="true" >
@@ -26,8 +44,12 @@
             </intent-filter>
 
         </activity>
+
         <activity
-            android:name=".activities.GamificationActivity"
+            android:name=".adminControlls.activities.PracticeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SocialActivity"
             android:exported="false" />
         <activity
             android:name=".activities.UserAccountActivity"
@@ -39,7 +61,7 @@
             android:name=".activities.BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ViewLectureActivity"
+            android:name=".activities.StudyActivity"
             android:exported="true"
             android:theme="@style/Theme.VULanguageApp">
 

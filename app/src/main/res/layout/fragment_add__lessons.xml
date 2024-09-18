@@ -1,90 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".adminControlls.fragments.AddLessons">
 
-    <TextView android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="30sp"
-        android:text="Add Lesson"
-        android:gravity="center_horizontal"/>
-
-    <EditText
-        android:id="@+id/courseIdEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course ID"
-        android:minHeight="48dp" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <EditText
-        android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Lesson Title"
-        android:minHeight="48dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Add Lesson"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"/>
+        <AutoCompleteTextView
+            android:id="@+id/addLessonCourseTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Title"
+            android:minHeight="48dp" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/contentTypeEditText"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Content Type"-->
-<!--        android:minHeight="48dp" />-->
+        <EditText
+            android:id="@+id/courseIdHidden"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-    <Spinner
-        android:id="@+id/contentTypeEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/lesson_type"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lesson Title"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/videoLinkEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Video Link"
-        android:minHeight="48dp" />
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal" />
 
-    <EditText
-        android:id="@+id/audioLinkEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Audio Link"
-        android:minHeight="48dp" />
+        <Spinner
+            android:id="@+id/contentTypeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/lesson_type"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/imageLinkEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Image Link"
-        android:minHeight="48dp" />
+<!--        <EditText-->
+<!--            android:id="@+id/videoLinkEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Video Link"-->
+<!--            android:minHeight="48dp" />-->
 
-    <EditText
-        android:id="@+id/flashcard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Flashcard"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/audioLinkEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Audio Link"
+            android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/exercise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="exercise"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/imageLinkEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Image Link"
+            android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/insertButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Insert Lesson" />
+        <EditText
+            android:id="@+id/flashcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Flashcard"
+            android:minHeight="48dp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/exercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Exercise"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Video Upload"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <VideoView
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_upload_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:text="Upload Status: 0%" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_select_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:text="Select Video" />
+
+            <Button
+                android:id="@+id/btn_upload_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="Upload Video" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/insertButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Insert Lesson" />
+
+    </LinearLayout>
+</ScrollView>

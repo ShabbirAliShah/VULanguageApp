@@ -43,8 +43,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CourseModel coursesDataModel = dataList.get(position);
-        holder.countryText.setText(coursesDataModel.getTitle());
-        holder.languageText.setText(coursesDataModel.getLevel());
+        holder.courseTitle.setText(coursesDataModel.getTitle());
+        holder.courseLevel.setText(coursesDataModel.getLevel());
 
         Log.d("Activity Adapter", "Course Id " + coursesDataModel.getCourseKey());
 
@@ -68,14 +68,14 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView languageText, countryText;
+        TextView courseLevel, courseTitle;
         RelativeLayout homeCard;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
-            countryText = itemView.findViewById(R.id.countryTextView);
-            languageText = itemView.findViewById(R.id.langTextView);
+            courseTitle = itemView.findViewById(R.id.courseTitleView);
+            courseLevel = itemView.findViewById(R.id.courseLevelView);
             homeCard = itemView.findViewById(R.id.cont);
         }
     }

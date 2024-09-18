@@ -2,12 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
 
+        <item android:id="@+id/testActivity"
+            android:title="Activity For Testing"
+            android:icon="@drawable/baseline_handshake_24"/>
+
     <item android:id="@+id/navHome"
         android:title="Home"
         android:icon="@drawable/side_nav_bar"/>
 
-        <item android:id="@+id/gamification"
-            android:title="Gamification"
+        <item android:id="@+id/chat"
+            android:title="Chat"
             android:icon="@drawable/ic_menu_camera"/>
     </group>
 
@@ -15,8 +19,8 @@
         <menu>
             <group android:checkableBehavior="single">
 
-                <item android:id="@+id/progress"
-                    android:title="Progress"
+                <item android:id="@+id/profile"
+                    android:title="Profile"
                     android:icon="@drawable/ic_menu_camera"/>
                 <item android:id="@+id/lecture"
                     android:title="Lesson"

@@ -41,4 +41,9 @@
             android:id="@+id/action_settingsMenuList_to_settingsGeneralFragment"
             app:destination="@id/settingsGeneralFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userStatesFragment"
+        android:name="com.example.vulanguageapp.fragments.UserProfileFragment"
+        android:label="fragment_user_states"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>

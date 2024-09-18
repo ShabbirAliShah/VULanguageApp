@@ -1,127 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.LectureViewFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout9"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/lessonViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="Todays Lesson"
-            android:textSize="25sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="216dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
-
-        <WebView
-            android:id="@+id/youtubeWebView"
+        <!-- Title Section -->
+        <LinearLayout
+            android:id="@+id/linearLayout9"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout18"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quiz"
-            android:textAllCaps="false"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <Button
-            android:id="@+id/viewFlashCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Flash Cards"
-            android:textAllCaps="false"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <Button
-            android:id="@+id/pronunciation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pronunciation"
-            android:textAllCaps="false"
-            tools:ignore="TouchTargetSizeCheck" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="146dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="20dp"
-        android:gravity="center_vertical"
-        android:text="Description"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout18"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/markComplete"
-        android:layout_width="183dp"
-        android:layout_height="wrap_content"
-        android:text="Mark as completed"
-        android:textColor="#009688"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout18" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="368dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="264dp"
-            android:text="@string/lorem_ipsum"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-            app:layout_constraintVertical_bias="0.141">
+            app:layout_constraintTop_toTopOf="parent">
 
-        </TextView>
+            <TextView
+                android:id="@+id/lessonViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today's Lesson"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-    </ScrollView>
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Video WebView Section -->
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout9">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/playerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <!-- Bottom Controls Section with ImageButtons -->
+        <LinearLayout
+            android:id="@+id/linearLayout18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout4">
+
+            <ImageButton
+                android:id="@+id/quizBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Quiz"
+                android:src="@drawable/ic_quiz"
+                app:tint="?attr/colorPrimary"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/viewFlashCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Flash Cards"
+                android:src="@drawable/ic_flashcards"
+                app:tint="?attr/colorPrimary"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/pronunciation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Pronunciation"
+                android:src="@drawable/pronunciate"
+                app:tint="?attr/colorPrimary"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <!-- Description and Mark Complete -->
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:text="Description"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout18" />
+
+        <LinearLayout
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintVertical_bias="0.109">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5dp"
+                android:text="@string/lorem_ipsum"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/markComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2196F3"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

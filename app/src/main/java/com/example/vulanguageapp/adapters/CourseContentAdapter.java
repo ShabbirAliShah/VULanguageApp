@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,48 +16,49 @@ import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
+import com.example.vulanguageapp.models.EnrollmentModel;
 import com.example.vulanguageapp.models.LessonsModel;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdapter.ViewHolder> {
-    public List<LessonsModel> dataList;
-    public final NavController navController;
 
-    public CourseContentAdapter(List<LessonsModel> dataList, NavController navController) {
+    private final ArrayList<LessonsModel> lessonList;
+    private final NavController navController;
+    private final ArrayList<EnrollmentModel> enrollmentDataList;
+
+    public CourseContentAdapter(ArrayList<LessonsModel> lessonList, NavController navController, ArrayList<EnrollmentModel> enrollmentDataList) {
+        this.lessonList = lessonList;
         this.navController = navController;
-        this.dataList = dataList;
+        this.enrollmentDataList = enrollmentDataList;
     }
 
     @NonNull
     @Override
-    public CourseContentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_view_for_course_content, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_for_course_content, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseContentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        LessonsModel lesson = lessonList.get(position);
+        holder.lessonTitle.setText(lesson.getTitle());
 
-        LessonsModel lessonsModel = dataList.get(position);
-        holder.lessonTitle.setText(lessonsModel.getTitle());
+        boolean isLessonCompleted = isLessonCompleted(lesson.getLessonId());
+        holder.checkBoxStatus.setChecked(isLessonCompleted);
 
-        if (lessonsModel.getIsCompleted() != null && lessonsModel.getIsCompleted()) {
-            holder.statustext.setText("Complete");
-        } else {
-            holder.statustext.setText("upcomming");
-        }
-
-        holder.card_for_course_content.setOnClickListener(view -> {
-
+        holder.lessonClick.setOnClickListener(v-> {
             Bundle dataBundle = new Bundle();
-            dataBundle.putString("link", lessonsModel.getVideoLink());
-            dataBundle.putString("lesson_title", lessonsModel.getTitle());
-            dataBundle.putString("lesson_id", lessonsModel.getLessonId());
+            dataBundle.putString("link", lesson.getVideoLink());
+            dataBundle.putString("lesson_title", lesson.getTitle());
+            dataBundle.putString("lesson_id", lesson.getLessonId());
+            //dataBundle.putSerializable("flashcard_id_list", lesson.getFlashCards());
 
-            Log.d("CourseContentAdapter", "Lesson_id " + lessonsModel.getLessonId());
+            Log.d("CourseContentAdapter", "Lesson_id " + lesson.getLessonId());
 
             navController.navigate(R.id.action_topicsToStudyFragment_to_lectureViewFragment, dataBundle);
         });
@@ -63,20 +66,29 @@ public class CourseContentAdapter extends RecyclerView.Adapter<CourseContentAdap
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return lessonList.size();
+    }
+
+    private boolean isLessonCompleted(String lessonId) {
+        for (EnrollmentModel enrollment : enrollmentDataList) {
+            Map<String, EnrollmentModel.Lesson> lessonsMap = enrollment.getSelectedLessons();
+            if (lessonsMap.containsKey(lessonId)) {
+                return lessonsMap.get(lessonId).isCompleted();
+            }
+        }
+        return false;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView lessonTitle;
+        CardView lessonClick;
+        CheckBox checkBoxStatus;
 
-        TextView lessonTitle, statustext;
-        CardView card_for_course_content;
-
-        public ViewHolder(View itemView){
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            lessonTitle = itemView.findViewById(R.id.lessonsToStudy);
-            card_for_course_content = itemView.findViewById(R.id.card_for_course_content);
-            statustext = itemView.findViewById(R.id.statustext);
+            lessonTitle = itemView.findViewById(R.id.lesson_title);
+            lessonClick = itemView.findViewById(R.id.card_for_course_content);
+            checkBoxStatus = itemView.findViewById(R.id.statustext);
         }
     }
 }

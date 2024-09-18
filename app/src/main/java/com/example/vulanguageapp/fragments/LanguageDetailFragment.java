@@ -25,6 +25,7 @@ import com.example.vulanguageapp.adapters.EnrollmentTopicListAdapter;
 import com.example.vulanguageapp.databinding.FragmentLanguageDetailBinding;
 import com.example.vulanguageapp.interfaces.UserIdProvider;
 import com.example.vulanguageapp.models.LessonsModel;
+import com.example.vulanguageapp.utils.DataTransporter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +45,7 @@ public class LanguageDetailFragment extends Fragment {
     private List<LessonsModel> dataList = new ArrayList<>();
     private UserIdProvider userIdProvider;
     private String courseId;
-    private String title;
+    private String coursetitle;
     private Button wishList, enroll, viewWishlist;
     private NavController navController;
     private LinearLayout buttonContainer;
@@ -81,7 +82,7 @@ public class LanguageDetailFragment extends Fragment {
         courseDescripton = binding.courseDescription;
         courseLevel = binding.courseLevel;
         courseDescriptonLabel = binding.courseDescriptonLabel;
-        buttonContainer = binding.enrollWishButton;
+        buttonContainer = binding.buttonContainer;
 
         return binding.getRoot();
     }
@@ -91,14 +92,14 @@ public class LanguageDetailFragment extends Fragment {
 
         if (getArguments() != null) {
             String name = getArguments().getString("language_name");
-            title = getArguments().getString("course_title");
+            coursetitle = getArguments().getString("course_title");
             String level = getArguments().getString("course_level");
             courseId = getArguments().getString("course_id");
             String course_Description = getArguments().getString("courseDescription");
 
-            Log.d("LanguageDetail fragment", "course Id in arguments" + courseId);
+            Toast.makeText(getContext(), "Course Id is " + courseId, Toast.LENGTH_SHORT).show();
 
-            courseTitle.setText(title);
+            courseTitle.setText(coursetitle);
             courseLevel.setText(level);
             languageName.setText(name);
             courseDescripton.setText(course_Description);
@@ -117,12 +118,10 @@ public class LanguageDetailFragment extends Fragment {
         enroll.setOnClickListener(v -> {
 
             Bundle bundle = new Bundle();
-            bundle.putSerializable("lessonsData", (Serializable) dataList);
+            bundle.putString("course_title", coursetitle);
             bundle.putString("course_Id", courseId);
-            bundle.putString("course_title", title);
-            bundle.putString("userId", ((BaseActivity) requireActivity()).getUserId());
+            navController.navigate(R.id.action_languageDetailFragment_to_enrollmentFragment, bundle);
 
-            navController.navigate(R.id.action_languageDetailFragment_to_topicToEnrollFragment, bundle);
         });
 
         viewWishlist.setOnClickListener(v->{
@@ -160,8 +159,8 @@ public class LanguageDetailFragment extends Fragment {
 
                     } else {
                         courseDescriptonLabel.setText("No lessons available for this course");
-                        wishList.setVisibility(View.GONE);
-                        enroll.setVisibility(View.GONE);
+                        buttonContainer.setVisibility(View.GONE);
+
                     }
                 }
 
@@ -183,10 +182,10 @@ public class LanguageDetailFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    buttonContainer.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Snapshot exists, course is enrolled", Toast.LENGTH_SHORT).show();
+                    buttonContainer.setVisibility(View.GONE);
                 } else {
-                    buttonContainer.setVisibility(View.VISIBLE);
+                    //buttonContainer.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "You are not enrolled in this course", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -220,7 +219,7 @@ public class LanguageDetailFragment extends Fragment {
                     Toast.makeText(getContext(), "Removed from wishlist", Toast.LENGTH_SHORT).show();
                 } else {
                     // Course is not in wishlist, add it
-                    wishlistRef.setValue(title);  // Add the course to the wishlist
+                    wishlistRef.setValue(coursetitle);  // Add the course to the wishlist
 
                     wishList.setText(R.string.remove_from_wishlist);  // Update the button text
                     Toast.makeText(getContext(), "Added to wishlist", Toast.LENGTH_SHORT).show();

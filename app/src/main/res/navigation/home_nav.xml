@@ -20,17 +20,12 @@
         android:label="fragment_language_detail"
         tools:layout="@layout/fragment_language_detail" >
         <action
-            android:id="@+id/action_languageDetailFragment_to_topicToEnrollFragment"
-            app:destination="@id/topicToEnrollFragment" />
-        <action
             android:id="@+id/action_languageDetailFragment_to_wishListFragment"
             app:destination="@id/wishListFragment" />
+        <action
+            android:id="@+id/action_languageDetailFragment_to_enrollmentFragment"
+            app:destination="@id/enrollmentFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/topicToEnrollFragment"
-        android:name="com.example.vulanguageapp.fragments.TopicToEnrollFragment"
-        android:label="fragment_topic_to_enroll"
-        tools:layout="@layout/fragment_topic_to_enroll" />
     <fragment
         android:id="@+id/wishListFragment"
         android:name="com.example.vulanguageapp.fragments.WishListFragment"
@@ -40,4 +35,9 @@
             android:id="@+id/action_wishListFragment_to_languageDetailFragment"
             app:destination="@id/languageDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/enrollmentFragment"
+        android:name="com.example.vulanguageapp.fragments.EnrollmentFragment"
+        android:label="fragment_enrollment"
+        tools:layout="@layout/fragment_enrollment" />
 </navigation>

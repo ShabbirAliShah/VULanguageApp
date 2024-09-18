@@ -1,3 +1,5 @@
+import java.net.HttpURLConnection
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
@@ -46,6 +48,9 @@ android {
     }
 }
 
+
+
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -61,6 +66,15 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.viewpager2)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.firebase.storage)
+    implementation(libs.exoplayer)
+    implementation(libs.play.services.games.v2)
+    implementation(libs.room.runtime)
+    implementation(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -71,15 +85,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation (libs.core.v1210)
-
     implementation(platform(libs.firebase.bom))
-
-    // Add the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation(libs.google.firebase.auth)
-
-    // Also add the dependency for the Google Play services library and specify its version
     implementation(libs.play.services.auth)
     implementation (libs.firebase.firestore)
-
 }

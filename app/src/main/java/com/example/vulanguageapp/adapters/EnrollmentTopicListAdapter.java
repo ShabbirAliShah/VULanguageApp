@@ -1,7 +1,6 @@
 package com.example.vulanguageapp.adapters;
 
 import android.content.Context;
-import android.content.ContextParams;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vulanguageapp.R;
-import com.example.vulanguageapp.fragments.TopicToEnrollFragment;
 import com.example.vulanguageapp.models.LessonsModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EnrollmentTopicListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -24,7 +21,6 @@ public class EnrollmentTopicListAdapter extends RecyclerView.Adapter<RecyclerVie
     private List<LessonsModel> dataList;
     private static final int VIEW_TYPE_ENROLL = 0;
     private static final int VIEW_TYPE_DISPLAY = 1;
-
     private final Context context;
     private final boolean isEnrollLayout;
 

@@ -12,11 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.vulanguageapp.R;
+
 import com.example.vulanguageapp.adapters.GamificationAdapter;
-import com.example.vulanguageapp.adapters.LessonActivityAdapter;
 import com.example.vulanguageapp.databinding.FragmentFlashCardsBinding;
-import com.example.vulanguageapp.models.Enrollment;
 import com.example.vulanguageapp.models.FlashCardModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +33,7 @@ public class FlashCardsFragment extends Fragment {
     private ArrayList<FlashCardModel> cardDatalist = new ArrayList<>();
     private RecyclerView cardRecyclerView;
     private GamificationAdapter gamificationAdapter;
+    private String language;
 
     public FlashCardsFragment() {
         // Required empty public constructor
@@ -61,8 +60,9 @@ public class FlashCardsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Log.d("Falshcards fragment onViewCreated ", " just check  " );
+        language = getArguments().getString("language");
 
-        gamificationAdapter = new GamificationAdapter(cardDatalist, getContext());
+        gamificationAdapter = new GamificationAdapter(cardDatalist, getContext(), language);
         cardRecyclerView.setAdapter(gamificationAdapter);
 
         fetchFlashCards();
@@ -71,12 +71,11 @@ public class FlashCardsFragment extends Fragment {
     private void fetchFlashCards() {
 
         if (getArguments() != null) {
-            String lessonId = getArguments().getString("lesson_id");
 
-            Log.d("Falshcards  ", "Lesson id  " + lessonId);
+            Log.d("Falshcards  ", "card language  " + language);
 
             DatabaseReference flashcardsRef = FirebaseDatabase.getInstance().getReference("flashcards");
-            Query cardWithLessonRef = flashcardsRef.orderByKey().equalTo(lessonId);
+            Query cardWithLessonRef = flashcardsRef.orderByChild("forLanguage").equalTo(language);
 
             cardWithLessonRef.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -98,6 +97,14 @@ public class FlashCardsFragment extends Fragment {
                 Log.e("EnrolledCoursesFragment", "Failed to read lesson data.", error.toException());
             }
         });
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (gamificationAdapter != null) {
+            gamificationAdapter.shutdownTTS();
         }
     }
 }

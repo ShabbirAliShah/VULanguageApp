@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,11 +7,10 @@
     tools:context=".adminControlls.fragments.Create_Course">
 
     <LinearLayout
-        android:id="@+id/linearLayout8"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -20,64 +18,158 @@
             android:gravity="center_horizontal"
             android:text="Create Course"
             android:textSize="30sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#009688"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/language_Name"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:entries="@array/language_list" />
+
+                    <Spinner
+                        android:id="@+id/level"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:entries="@array/experience_levels" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/addlessonTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Course title" />
+
+                <EditText
+                    android:id="@+id/course_Descripton"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Description" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:text="Save" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="Create Flashcards"
+            android:textSize="30sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#009688"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/flashCardImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:background="@drawable/border"
+                    android:src="@drawable/ic_menu_slideshow"
+                    android:contentDescription="Selected Image" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/language_Name1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:entries="@array/language_list" />
+
+                    <EditText
+                        android:id="@+id/pronunciationText"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="2"
+                        android:hint="Pronunciation" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/inLanguage_Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="In language word"
+                        android:minHeight="50dp" />
+
+                    <EditText
+                        android:id="@+id/textCardBack"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="word for backside"
+                        android:minHeight="50dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/saveFlashCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Save" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/languageName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:hint="Langauge Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
-
-    <EditText
-        android:id="@+id/addlessonTitle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:hint="Course title"
-        app:layout_constraintTop_toBottomOf="@+id/languageName"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <EditText
-        android:id="@+id/addLessonList"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:hint="Lesson List"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addlessonTitle" />
-
-    <EditText
-        android:id="@+id/level"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:hint="Level"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLessonList" />
-
-    <EditText
-        android:id="@+id/course_Descripton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Description"
-        app:layout_constraintTop_toBottomOf="@+id/level" />
-
-    <Button
-        android:id="@+id/save"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="44dp"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_Descripton" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

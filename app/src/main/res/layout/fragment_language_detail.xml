@@ -7,116 +7,144 @@
     android:layout_height="match_parent"
     tools:context=".fragments.LanguageDetailFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayout"
+    <!-- Scrollable Container -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@drawable/nav_menu_header_bg" />
-
-        <TextView
-            android:id="@+id/courseTitle"
+        <!-- Vertical layout to hold all content -->
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Language Title will be showed here"
-            android:textSize="20sp" />
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            <!-- Image Header -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nav_menu_header_bg"
+                android:contentDescription="Language Header Image" />
 
+            <!-- Language Title -->
             <TextView
-                android:id="@+id/languageName"
-                android:layout_width="wrap_content"
+                android:id="@+id/courseTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Language Nmae"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:text="Language Title"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
 
+            <!-- Language Name and Level -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/languageName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Language Name"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif" />
+
+                <TextView
+                    android:id="@+id/courseLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Proficiency Level"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif" />
+
+            </LinearLayout>
+
+            <!-- Course Description Label -->
             <TextView
-                android:id="@+id/courseLevel"
-                android:layout_width="wrap_content"
+                android:id="@+id/courseDescriptonLabel"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="Proficency level"
-                android:textSize="14sp" />
+                android:layout_marginTop="16dp"
+                android:text="Description"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
 
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/courseDescriptonLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Description"
-            android:textSize="18sp" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp">
-
+            <!-- Course Description -->
             <TextView
                 android:id="@+id/courseDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Course Description "
-                android:textSize="14sp" />
+                android:layout_marginTop="8dp"
+                android:text="Course Description"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif" />
 
-        </ScrollView>
+            <!-- Course Contents Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Course Contents"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Course Contents"
-            android:textSize="18sp" />
+            <!-- Lessons RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lessonsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:clipToPadding="false" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lessonsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp" />
+            <!-- Buttons Container -->
+            <LinearLayout
+                android:id="@+id/buttonContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/enroll_WishButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+                <Button
+                    android:id="@+id/wishlist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Wishlist Toggle"
+                    style="?attr/materialButtonStyle" />
 
-            <Button
-                android:id="@+id/wishlist"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="wishlist toggle"/>
+                <Button
+                    android:id="@+id/enroll"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Enroll Button"
+                    style="?attr/materialButtonStyle" />
 
-            <Button
-                android:id="@+id/enroll"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:text="Enroll" />
+                <Button
+                    android:id="@+id/viewWishList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="View Wishlist"
+                    style="?attr/materialButtonStyle" />
 
-            <Button
-                android:id="@+id/viewWishList"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:text="wishlist" />
-        </LinearLayout>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

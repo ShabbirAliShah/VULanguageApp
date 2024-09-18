@@ -22,8 +22,11 @@ import com.example.vulanguageapp.adminControlls.fragments.AddLessons;
 import com.example.vulanguageapp.adminControlls.fragments.DashBoard;
 import com.example.vulanguageapp.adminControlls.fragments.FragmentAdapter;
 import com.example.vulanguageapp.databinding.ActivityAdminDashboardBinding;
+import com.example.vulanguageapp.interfaces.BaseActivityInterface;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
 
 public class AdminDashboard extends AppCompatActivity {
 
@@ -66,6 +69,7 @@ public class AdminDashboard extends AppCompatActivity {
 //            navController.navigate(R.id.action_dashBoard_to_create_Course);
 //        });
     }
+
 
 //    @Override
 //    public boolean onSupportNavigateUp() {

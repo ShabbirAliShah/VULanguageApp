@@ -1,48 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#F6F3F3">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_for_course_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:textAlignment="center"
         app:cardCornerRadius="20dp"
         android:elevation="10dp"
         app:contentPadding="5dp"
         app:cardUseCompatPadding="true"
-        android:backgroundTint="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<LinearLayout
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/lessonsToStudy"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:text="This is the exampl of topic one."
-        android:textSize="24sp" />
+            <TextView
+                android:id="@+id/lesson_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Lesson title will be added here, Multi line title box test"
+                android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/statustext"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="isComplete"
-        android:textSize="18sp" />
-
-</LinearLayout>
+            <CheckBox
+                android:id="@+id/statustext"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:focusable="false"
+                android:textSize="18sp" />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

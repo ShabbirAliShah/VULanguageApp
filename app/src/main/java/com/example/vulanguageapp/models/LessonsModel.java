@@ -1,10 +1,15 @@
 package com.example.vulanguageapp.models;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@IgnoreExtraProperties
 public class LessonsModel {
+    @Exclude
     private String lessonId;
     private String audioLink;
     private String contentType;
@@ -15,14 +20,17 @@ public class LessonsModel {
     private List<Map<String, Object>> quiz;
     private String title;
     private String videoLink;
-    private Boolean selected;
+
+    @Exclude
+    private Boolean isSelected;
+    @Exclude
     private Boolean isCompleted;
 
     public LessonsModel() {
         // Default constructor required for calls to DataSnapshot.getValue(LessonsModel.class)
     }
 
-    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, boolean selected, List<String> flashCards, List<String> exercises , Boolean isCompleted) {
+    public LessonsModel(String lessonId, String audioLink, String contentType, String courseId, String imageLink, String title, String videoLink, List<String> flashCards, List<String> exercises) {
 
         this.lessonId = lessonId;
         this.audioLink = audioLink;
@@ -31,11 +39,9 @@ public class LessonsModel {
         this.imageLink = imageLink;
         this.title = title;
         this.videoLink = videoLink;
-        this.selected = selected;
         this.flashCards = flashCards;
         this.exercises = exercises;
-        this.isCompleted = isCompleted;
-    }
+     }
 
     public String getLessonId() {
         return lessonId;
@@ -93,12 +99,14 @@ public class LessonsModel {
         this.videoLink = videoLink;
     }
 
+    @Exclude
     public boolean isSelected() {
-        return selected;
+        return isSelected != null ? isSelected : false;
     }
 
+    @Exclude
     public void setSelected(boolean selected) {
-        this.selected = selected;
+        this.isSelected = selected;
     }
 
     public List<String> getExercises() {
@@ -117,10 +125,12 @@ public class LessonsModel {
         this.flashCards = flashCards;
     }
 
+    @Exclude
     public Boolean getIsCompleted() {  // Add this getter
         return isCompleted;
     }
 
+    @Exclude
     public void setIsCompleted(Boolean isCompleted) {  // Add this setter
         this.isCompleted = isCompleted;
     }

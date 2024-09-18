@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#554433"
     app:cardElevation="2dp"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true">
@@ -13,14 +12,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/course_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="Urdu Language for Beginers"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -10,15 +10,13 @@ public class CourseModel implements Serializable {
     private String level;
     private String title;
     private String courseKey; // For storing course ID
-    private List<String> lessons; // For storing lessons
     private String courseDescription;
 
-    public CourseModel(String language, String level, String title, String courseKey, List<String> lessons, String courseDescription) {
+    public CourseModel(String language, String level, String title, String courseKey, String courseDescription) {
         this.language = language;
         this.level = level;
         this.title = title;
         this.courseKey = courseKey;
-        this.lessons = lessons;
         this.courseDescription = courseDescription;
     }
     public CourseModel(){
@@ -42,9 +40,6 @@ public class CourseModel implements Serializable {
         return courseKey;
     }
 
-    public List<String> getLessons() {
-        return lessons;
-    }
 
     public String getCourseDescription() {
         return courseDescription;
@@ -71,7 +66,4 @@ public class CourseModel implements Serializable {
         this.courseKey = key;
     }
 
-    public void setLessons(ArrayList<String> lessons) {
-        this.lessons = lessons;
-    }
 }

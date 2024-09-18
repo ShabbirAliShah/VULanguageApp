@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_view_lesson"
-    app:startDestination="@id/enrolledCoursesFragment">
+    app:startDestination="@id/enrolledCourseFragment">
 
     <fragment
         android:id="@+id/topicsToStudyFragment"
@@ -25,24 +25,44 @@
         <action
             android:id="@+id/action_lectureViewFragment_to_pronunciationExecerciseFragment"
             app:destination="@id/pronunciationExecerciseFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/enrolledCoursesFragment"
-        android:name="com.example.vulanguageapp.fragments.EnrolledCoursesFragment"
-        android:label="fragment_enrolled_courses"
-        tools:layout="@layout/fragment_enrolled_courses" >
         <action
-            android:id="@+id/action_enrolledCoursesFragment_to_topicsToStudyFragment"
-            app:destination="@id/topicsToStudyFragment" />
+            android:id="@+id/action_lectureViewFragment_to_quizFragment2"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
         android:id="@+id/flashCardsFragment"
         android:name="com.example.vulanguageapp.fragments.FlashCardsFragment"
         android:label="fragment_flash_cards"
-        tools:layout="@layout/fragment_flash_cards" />
+        tools:layout="@layout/fragment_flash_cards" >
+        <action
+            android:id="@+id/action_flashCardsFragment_to_lectureViewFragment"
+            app:destination="@id/lectureViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pronunciationExecerciseFragment"
         android:name="com.example.vulanguageapp.fragments.PronunciationExecerciseFragment"
         android:label="fragment_pronunciation_execercise"
-        tools:layout="@layout/fragment_pronunciation_execercise" />
+        tools:layout="@layout/fragment_pronunciation_execercise" >
+        <action
+            android:id="@+id/action_pronunciationExecerciseFragment_to_lectureViewFragment"
+            app:destination="@id/lectureViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.vulanguageapp.fragments.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_lectureViewFragment"
+            app:destination="@id/lectureViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enrolledCourseFragment"
+        android:name="com.example.vulanguageapp.fragments.EnrolledCourseFragment"
+        android:label="fragment_enrolled_course"
+        tools:layout="@layout/fragment_enrolled_course" >
+        <action
+            android:id="@+id/action_enrolledCourseFragment_to_topicsToStudyFragment"
+            app:destination="@id/topicsToStudyFragment" />
+    </fragment>
 </navigation>

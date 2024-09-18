@@ -1,22 +1,31 @@
 package com.example.vulanguageapp.models;
 
 public class FlashCardModel {
-    private String courseId;
     private String cardText;
+    private String forLanguage;
     private String inLanguageText;
     private String cardBackText;
-    private int cardImage;
+    private String cardImageLink;
 
     public FlashCardModel(){
 
     }
 
-    public FlashCardModel(String courseId, String cardText,String inLanguageText, String cardBackText, int cardImage) {
-        this.courseId = courseId;
-        this.cardText = cardText;
+    public FlashCardModel(String textForPronunciation,String forLanguage, String inLanguageText, String cardBackText, String cardImageLink) {
+        this.cardText = textForPronunciation;
         this.cardBackText = cardBackText;
-        this.cardImage = cardImage;
+        this.cardImageLink = cardImageLink;
+        this.forLanguage = forLanguage;
         this.inLanguageText = inLanguageText;
+    }
+
+    public String getForLanguage() {
+        return forLanguage;
+    }
+
+    public void setForLanguage(String forLanguage) {
+
+        this.forLanguage = forLanguage;
     }
 
     public String getInLanguageText() {
@@ -28,12 +37,12 @@ public class FlashCardModel {
         this.inLanguageText = inLanguageText;
     }
 
-    public int getCardImage() {
-        return cardImage;
+    public String getCardImage() {
+        return cardImageLink;
     }
 
-    public void setCardImage(int cardImage) {
-        this.cardImage = cardImage;
+    public void setCardImage(String cardImage) {
+        this.cardImageLink = cardImage;
     }
 
     public void  setCardBackText(String cardBackText){
@@ -52,11 +61,4 @@ public class FlashCardModel {
         this.cardText = cardText;
     }
 
-    public String getCourseTitle() {
-        return courseId;
-    }
-
-    public void setCourseTitle(String courseTitle) {
-        this.courseId = courseTitle;
-    }
 }
