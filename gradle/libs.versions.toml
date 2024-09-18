@@ -1,17 +1,17 @@
 [versions]
-agp = "8.5.2"
+agp = "8.7.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 material = "1.12.0"
-constraintlayout = "2.1.4"
+constraintlayout = "2.2.0"
 googleGmsGoogleServices = "4.4.1"
 firebaseDatabase = "21.0.0"
-navigationFragment = "2.8.1"
-navigationUi = "2.8.1"
-firebaseStorage = "21.0.0"
+navigationFragment = "2.8.4"
+navigationUi = "2.8.4"
+firebaseStorage = "21.0.1"
 exoplayer = "2.19.1"
-navigationRuntime = "2.8.1"
+navigationRuntime = "2.8.4"
 roomCommon = "2.6.1"
 junitJunit = "4.13.2"
 roomRuntimeVersion = "2.6.1"
@@ -20,9 +20,10 @@ media3Ui = "1.4.1"
 media3Exoplayer = "1.4.1"
 media3Common = "1.4.1"
 monitor = "1.7.2"
+glide = "5.0.0-rc01"
 
 [libraries]
-google-firebase-auth = { module = "com.google.firebase:firebase-auth", version = "23.0.0" }
+google-firebase-auth = { module = "com.google.firebase:firebase-auth", version = "23.1.0" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -43,6 +44,7 @@ androidx-media3-ui = { group = "androidx.media3", name = "media3-ui", version.re
 androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Exoplayer" }
 androidx-media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Common" }
 androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

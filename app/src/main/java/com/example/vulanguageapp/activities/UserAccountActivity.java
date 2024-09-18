@@ -21,12 +21,13 @@ import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.adapters.CustomExpandableListAdapter;
 import com.example.vulanguageapp.fragments.SettingsGeneralFragment;
 import com.example.vulanguageapp.fragments.UserLoginFragment;
+import com.example.vulanguageapp.fragments.UserProfileFragment;
 import com.example.vulanguageapp.interfaces.UserIdProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 //Fragments contained in this activity;
-//UserLoginFragment, UserRegistrationFragment, SettingsGeneralFragment;
+//UserLoginFragment, UserRegistrationFragment, SettingsGeneralFragment, userprofileFragment;
 public class UserAccountActivity extends AppCompatActivity implements UserIdProvider {
 
     @Override
@@ -34,6 +35,12 @@ public class UserAccountActivity extends AppCompatActivity implements UserIdProv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_account);
 
+        String fragmentToLoad = getIntent().getStringExtra("fragment_to_load");
+        if (fragmentToLoad != null && fragmentToLoad.equals("UserProfileFragment")) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.userAccountFragmentContainerView, new UserProfileFragment())
+                    .commit();
+        }
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -52,10 +59,7 @@ public class UserAccountActivity extends AppCompatActivity implements UserIdProv
                 }
             }
         }
-
-
     }
-
 
     @Override
     public String getUserId() {

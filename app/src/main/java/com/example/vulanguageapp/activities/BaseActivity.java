@@ -41,7 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity implements UserIdPr
     private String userId;
     private String key;
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -72,7 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UserIdPr
         editor.putString(KEY_LANGUAGE, currentCourse);
         editor.putString(KEY_USER_ID, userId);
         editor.apply();
-}
+    }
 
     public boolean setNavigationDrawer(){
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -119,8 +118,12 @@ public abstract class BaseActivity extends AppCompatActivity implements UserIdPr
                 } else if (itemId == R.id.logut) {
                     mAuth.signOut();
                     startActivity(new Intent(BaseActivity.this, UserAccountActivity.class));
+
                 } else if (itemId == R.id.profile) {
-                    startActivity(new Intent(BaseActivity.this, UserAccountActivity.class));
+
+                    Intent intent = new Intent(BaseActivity.this, UserAccountActivity.class);
+                    intent.putExtra("fragment_to_load", "UserProfileFragment");
+                    startActivity(intent);
                 }
 
                 drawerLayout.closeDrawer(GravityCompat.START);

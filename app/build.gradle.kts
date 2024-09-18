@@ -66,5 +66,6 @@ dependencies {
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.monitor)
     implementation(libs.ext.junit)
+    implementation(libs.glide)
     annotationProcessor(libs.androidx.room.compiler)
 }

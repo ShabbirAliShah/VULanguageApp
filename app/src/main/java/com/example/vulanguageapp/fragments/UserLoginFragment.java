@@ -9,6 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,18 @@ import android.widget.Toast;
 
 import com.example.vulanguageapp.R;
 import com.example.vulanguageapp.activities.MainActivity;
+import com.example.vulanguageapp.activities.StudyActivity;
+import com.example.vulanguageapp.adminControlls.activities.AdminDashboard;
 import com.example.vulanguageapp.databinding.FragmentUserLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserLoginFragment extends Fragment {
 
@@ -42,7 +49,6 @@ public class UserLoginFragment extends Fragment {
         super.onStart();
         FirebaseUser currentUsr = mAuth.getCurrentUser();
         if (currentUsr != null) {
-
             startActivity(new Intent(getContext(), MainActivity.class));
         }
     }
@@ -50,14 +56,11 @@ public class UserLoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentUserLoginBinding.inflate(inflater, container, false);
-
-        // Inflate the layout for this fragment
         return binding.getRoot();
     }
 
@@ -75,50 +78,71 @@ public class UserLoginFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         NavController navController = NavHostFragment.findNavController(this);
-        gotoReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        gotoReg.setOnClickListener(v -> navController.navigate(R.id.action_userLoginFragment_to_userRegisterationFragment));
 
-                navController.navigate(R.id.action_userLoginFragment_to_userRegisterationFragment);
+        loginButton.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            String usrEmail = email.getText().toString();
+            String usrPassword = password.getText().toString();
 
+            if (TextUtils.isEmpty(usrEmail)) {
+                Toast.makeText(getContext(), "Enter Email", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
             }
-        });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                String usrEmail, usrPassword;
+            if (TextUtils.isEmpty(usrPassword)) {
+                Toast.makeText(getContext(), "Enter Password", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
+            }
 
-                usrEmail = email.getText().toString();
-                usrPassword = password.getText().toString();
-
-                if (TextUtils.isEmpty(usrEmail)) {
-
-                    Toast.makeText(getContext(), "Enter Email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(usrPassword)) {
-                    Toast.makeText(getContext(), "Enter Password", Toast.LENGTH_SHORT).show();
-                }
-
-                mAuth.signInWithEmailAndPassword(usrEmail, usrPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        progressBar.setVisibility(View.GONE);
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getContext(), MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getContext(), "Login Authentication failed", Toast.LENGTH_SHORT).show();
-                        }
+            mAuth.signInWithEmailAndPassword(usrEmail, usrPassword).addOnCompleteListener(task -> {
+                progressBar.setVisibility(View.GONE);
+                if (task.isSuccessful()) {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user != null) {
+                        String userId = user.getUid();
+                        checkAdmin(userId, isAdmin -> {
+                            if (isAdmin) {
+                                Intent intent = new Intent(getContext(), AdminDashboard.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(getContext(), StudyActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
-                });
+                } else {
+                    Toast.makeText(getContext(), "Login Authentication failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+    }
+
+    private void checkAdmin(String userId, AdminCheckCallback callback) {
+        FirebaseDatabase.getInstance().getReference("roles").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.hasChild("isAdmin")) {
+                    boolean isAdmin = Boolean.TRUE.equals(snapshot.child("isAdmin").getValue(Boolean.class));
+                    Log.d("CheckAdmin", "isAdmin: " + isAdmin);
+                    callback.onResult(isAdmin);
+                } else {
+                    Log.d("CheckAdmin", "isAdmin key does not exist for user.");
+                    callback.onResult(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CheckAdmin", "Database error: " + error.getMessage());
+                callback.onResult(false);
             }
         });
+    }
+
+    interface AdminCheckCallback {
+        void onResult(boolean isAdmin);
     }
 }

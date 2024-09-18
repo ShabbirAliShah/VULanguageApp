@@ -12,7 +12,6 @@ public class StudyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContent(R.layout.content_lesson_view);
 
     }
